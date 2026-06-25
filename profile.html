@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>โปรไฟล์ & ตั้งค่า | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);">
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="dashSidebar">
+  <div class="sidebar-logo">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    LearnHub
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">เมนูหลัก</div>
+    <a href="student-dashboard.html" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="my-courses.html" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      คอร์สของฉัน
+    </a>
+    <a href="certificate.html" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      ใบประกาศนียบัตร
+    </a>
+    <a href="profile.html" class="sidebar-link active">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      ตั้งค่าบัญชี
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar"><img src="https://ui-avatars.com/api/?name=Somsak+R&background=CA895F&color=fff&size=72" alt="" id="sidebarAvatar"></div>
+      <div><div class="sidebar-user-name">สมศักดิ์ รักเรียน</div><div class="sidebar-user-role">ผู้เรียน</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="dashboard-layout">
+  <header class="dash-header">
+    <div class="dash-header-left">
+      <button class="navbar-icon-btn dash-mobile-toggle" id="sidebarToggle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="dash-breadcrumb"><a href="student-dashboard.html">Dashboard</a><span>›</span><span>โปรไฟล์ & ตั้งค่า</span></div>
+    </div>
+    <div class="dash-header-right">
+      <a href="index.html" class="btn btn-ghost btn-sm">🏠 หน้าแรก</a>
+      <img src="https://ui-avatars.com/api/?name=Somsak+R&background=CA895F&color=fff&size=72" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--color-border);" alt="">
+    </div>
+  </header>
+
+  <main class="dash-content">
+    <!-- Title -->
+    <div style="margin-bottom:1.75rem;">
+      <h1 class="dash-page-title">⚙️ โปรไฟล์ & ตั้งค่า</h1>
+      <p class="dash-page-subtitle">จัดการข้อมูลส่วนตัวและการตั้งค่าบัญชีของคุณ</p>
+    </div>
+
+    <!-- Settings Layout -->
+    <div style="display:grid;grid-template-columns:240px 1fr;gap:1.5rem;" id="settingsLayout">
+      <!-- Settings Nav -->
+      <div>
+        <div class="card" style="padding:0;overflow:hidden;">
+          <button data-settings-tab="profile" class="settings-nav-btn active" onclick="switchSettingsTab('profile')">
+            <span>👤</span> โปรไฟล์
+          </button>
+          <button data-settings-tab="security" class="settings-nav-btn" onclick="switchSettingsTab('security')">
+            <span>🔒</span> ความปลอดภัย
+          </button>
+          <button data-settings-tab="notifications" class="settings-nav-btn" onclick="switchSettingsTab('notifications')">
+            <span>🔔</span> การแจ้งเตือน
+          </button>
+          <button data-settings-tab="billing" class="settings-nav-btn" onclick="switchSettingsTab('billing')">
+            <span>💳</span> การชำระเงิน
+          </button>
+          <div style="height:1px;background:var(--color-border);"></div>
+          <button onclick="showToast('ออกจากระบบแล้ว','warning');setTimeout(()=>window.location.href='login.html',1000)" class="settings-nav-btn" style="color:var(--color-danger);">
+            <span>↪</span> ออกจากระบบ
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings Content -->
+      <div>
+        <!-- Profile Tab -->
+        <div id="tab-profile" class="settings-panel active">
+          <!-- Avatar Section -->
+          <div class="card" style="padding:1.5rem;margin-bottom:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">รูปโปรไฟล์</h2>
+            <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+              <div style="position:relative;">
+                <img src="https://ui-avatars.com/api/?name=Somsak+R&background=CA895F&color=fff&size=128" id="avatarPreview" style="width:96px;height:96px;border-radius:50%;border:3px solid var(--color-border);" alt="">
+                <button onclick="document.getElementById('avatarInput').click()" style="position:absolute;bottom:0;right:0;width:28px;height:28px;border-radius:50%;background:var(--color-primary);border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <input type="file" id="avatarInput" accept="image/*" style="display:none;" onchange="previewAvatar(this)">
+              </div>
+              <div>
+                <h3 style="font-weight:700;font-size:0.9375rem;margin-bottom:0.375rem;">สมศักดิ์ รักเรียน</h3>
+                <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:0.875rem;">ผู้เรียน · สมาชิกตั้งแต่ มกราคม 2566</p>
+                <button onclick="document.getElementById('avatarInput').click()" class="btn btn-outline btn-sm">📸 เปลี่ยนรูป</button>
+                <button onclick="showToast('ลบรูปโปรไฟล์แล้ว')" class="btn btn-ghost btn-sm" style="color:var(--color-danger);">ลบรูป</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Personal Info -->
+          <div class="card" style="padding:1.5rem;margin-bottom:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">ข้อมูลส่วนตัว</h2>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label">ชื่อ</label>
+                <input type="text" class="form-input" value="สมศักดิ์">
+              </div>
+              <div class="form-group">
+                <label class="form-label">นามสกุล</label>
+                <input type="text" class="form-input" value="รักเรียน">
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">อีเมล</label>
+                <div style="position:relative;">
+                  <input type="email" class="form-input" value="somsak@example.com">
+                  <span style="position:absolute;right:0.875rem;top:50%;transform:translateY(-50%);font-size:0.75rem;color:var(--color-success);font-weight:700;">✓ ยืนยันแล้ว</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">โทรศัพท์</label>
+                <input type="tel" class="form-input" value="081-234-5678">
+              </div>
+              <div class="form-group">
+                <label class="form-label">วันเกิด</label>
+                <input type="date" class="form-input" value="1995-05-15">
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">ชื่อผู้ใช้ (Username)</label>
+                <div style="position:relative;">
+                  <span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);color:var(--color-text-muted);font-size:0.875rem;">@</span>
+                  <input type="text" class="form-input" style="padding-left:2rem;" value="somsak_learns">
+                </div>
+              </div>
+              <div class="form-group" style="grid-column:1/-1;">
+                <label class="form-label">แนะนำตัวเอง</label>
+                <textarea class="form-textarea" rows="3">ผู้เรียนที่หลงใหลในการพัฒนาเว็บและ Mobile App มีประสบการณ์ 3 ปีด้าน Frontend</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">เว็บไซต์ / Portfolio</label>
+                <input type="url" class="form-input" placeholder="https://..." value="https://somsak.dev">
+              </div>
+              <div class="form-group">
+                <label class="form-label">ตำแหน่ง / อาชีพ</label>
+                <input type="text" class="form-input" placeholder="เช่น Frontend Developer" value="Junior Developer">
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;margin-top:1.25rem;gap:0.75rem;">
+              <button onclick="showToast('ยกเลิกการแก้ไข')" class="btn btn-ghost btn-sm">ยกเลิก</button>
+              <button onclick="showToast('บันทึกข้อมูลเรียบร้อย ✅','success')" class="btn btn-primary btn-sm">บันทึกข้อมูล</button>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">🔗 Social Media</h2>
+            <div style="display:flex;flex-direction:column;gap:0.875rem;">
+              <div style="position:relative;"><span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);">🐦</span><input type="url" class="form-input" style="padding-left:2.25rem;" placeholder="Twitter URL" value="https://twitter.com/somsak_dev"></div>
+              <div style="position:relative;"><span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);">💼</span><input type="url" class="form-input" style="padding-left:2.25rem;" placeholder="LinkedIn URL"></div>
+              <div style="position:relative;"><span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);">📷</span><input type="url" class="form-input" style="padding-left:2.25rem;" placeholder="Instagram URL"></div>
+            </div>
+            <div style="text-align:right;margin-top:1rem;">
+              <button onclick="showToast('บันทึก Social Links แล้ว ✅','success')" class="btn btn-primary btn-sm">บันทึก</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Tab -->
+        <div id="tab-security" class="settings-panel" style="display:none;">
+          <div class="card" style="padding:1.5rem;margin-bottom:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">🔑 เปลี่ยนรหัสผ่าน</h2>
+            <div style="display:flex;flex-direction:column;gap:1rem;max-width:440px;">
+              <div class="form-group">
+                <label class="form-label">รหัสผ่านปัจจุบัน</label>
+                <div class="form-input-icon">
+                  <input type="password" class="form-input" placeholder="กรอกรหัสผ่านเดิม" id="currentPwd">
+                  <button onclick="togglePasswordVis('currentPwd')" type="button" style="position:absolute;right:0.875rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--color-text-muted);">👁</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">รหัสผ่านใหม่</label>
+                <input type="password" class="form-input" placeholder="อย่างน้อย 8 ตัวอักษร" id="newPwd" oninput="checkStrength(this.value)">
+                <!-- Strength bars -->
+                <div style="display:flex;gap:3px;margin-top:0.5rem;">
+                  <div id="bar1" style="flex:1;height:4px;border-radius:2px;background:var(--color-border);transition:background 0.2s;"></div>
+                  <div id="bar2" style="flex:1;height:4px;border-radius:2px;background:var(--color-border);transition:background 0.2s;"></div>
+                  <div id="bar3" style="flex:1;height:4px;border-radius:2px;background:var(--color-border);transition:background 0.2s;"></div>
+                  <div id="bar4" style="flex:1;height:4px;border-radius:2px;background:var(--color-border);transition:background 0.2s;"></div>
+                </div>
+                <span id="strengthLabel" style="font-size:0.75rem;color:var(--color-text-muted);"></span>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ยืนยันรหัสผ่านใหม่</label>
+                <input type="password" class="form-input" placeholder="กรอกรหัสผ่านใหม่อีกครั้ง" id="confirmPwd">
+              </div>
+              <button onclick="changePassword()" class="btn btn-primary">เปลี่ยนรหัสผ่าน</button>
+            </div>
+          </div>
+
+          <div class="card" style="padding:1.5rem;margin-bottom:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:0.5rem;">🛡️ Two-Factor Authentication</h2>
+            <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1.25rem;">เพิ่มความปลอดภัยให้บัญชีด้วย OTP</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:0.875rem;">
+                <span style="font-size:1.75rem;">📱</span>
+                <div><div style="font-weight:700;font-size:0.9375rem;">Authenticator App</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ใช้ Google Authenticator หรือ Authy</div></div>
+              </div>
+              <label style="position:relative;display:inline-block;width:48px;height:26px;cursor:pointer;">
+                <input type="checkbox" id="2faToggle" style="opacity:0;width:0;height:0;" onchange="showToast(this.checked?'เปิด 2FA แล้ว ✅':'ปิด 2FA แล้ว')">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">📱 Session ที่ Active</h2>
+            <div style="display:flex;flex-direction:column;gap:0.875rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:0.875rem;background:var(--color-gray-50);border-radius:var(--radius-lg);">
+                <div style="display:flex;align-items:center;gap:0.875rem;">
+                  <span style="font-size:1.25rem;">💻</span>
+                  <div><div style="font-weight:700;font-size:0.875rem;">Windows 11 · Chrome 120 <span class="badge badge-active" style="margin-left:0.5rem;">อุปกรณ์นี้</span></div><div style="font-size:0.75rem;color:var(--color-text-muted);">Bangkok, Thailand · เมื่อกี้</div></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:0.875rem;background:var(--color-gray-50);border-radius:var(--radius-lg);">
+                <div style="display:flex;align-items:center;gap:0.875rem;">
+                  <span style="font-size:1.25rem;">📱</span>
+                  <div><div style="font-weight:700;font-size:0.875rem;">iPhone 15 · Safari</div><div style="font-size:0.75rem;color:var(--color-text-muted);">Bangkok, Thailand · 2 ชั่วโมงที่แล้ว</div></div>
+                </div>
+                <button onclick="showToast('ออกจากระบบอุปกรณ์นั้นแล้ว','warning')" class="btn btn-danger btn-sm">ออก</button>
+              </div>
+            </div>
+            <button onclick="showToast('ออกจากระบบทุกอุปกรณ์แล้ว','warning')" class="btn btn-outline btn-sm" style="margin-top:1rem;border-color:var(--color-danger);color:var(--color-danger);">ออกจากระบบทุกอุปกรณ์</button>
+          </div>
+        </div>
+
+        <!-- Notifications Tab -->
+        <div id="tab-notifications" class="settings-panel" style="display:none;">
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.5rem;">🔔 การแจ้งเตือน</h2>
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <!-- Section -->
+              <div style="padding-bottom:1.25rem;margin-bottom:1.25rem;border-bottom:1px solid var(--color-border);">
+                <h3 style="font-size:0.875rem;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem;">อีเมล</h3>
+                <div style="display:flex;flex-direction:column;gap:0.875rem;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-weight:600;font-size:0.9375rem;">คอร์สใหม่จากผู้สอนที่ติดตาม</div><div style="font-size:0.8rem;color:var(--color-text-muted);">รับอีเมลเมื่อผู้สอนที่ติดตามอัปโหลดคอร์สใหม่</div></div><label class="toggle-label"><input type="checkbox" checked onchange="showToast('อัปเดตการแจ้งเตือนแล้ว')"><span class="toggle-slider"></span></label></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-weight:600;font-size:0.9375rem;">โปรโมชันและส่วนลด</div><div style="font-size:0.8rem;color:var(--color-text-muted);">Flash sale, คูปองพิเศษ</div></div><label class="toggle-label"><input type="checkbox" checked onchange="showToast('อัปเดตการแจ้งเตือนแล้ว')"><span class="toggle-slider"></span></label></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-weight:600;font-size:0.9375rem;">ข่าวสารและอัปเดต</div><div style="font-size:0.8rem;color:var(--color-text-muted);">Newsletter รายสัปดาห์</div></div><label class="toggle-label"><input type="checkbox" onchange="showToast('อัปเดตการแจ้งเตือนแล้ว')"><span class="toggle-slider"></span></label></div>
+                </div>
+              </div>
+              <div>
+                <h3 style="font-size:0.875rem;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:1rem;">In-App</h3>
+                <div style="display:flex;flex-direction:column;gap:0.875rem;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-weight:600;font-size:0.9375rem;">เตือนเรียนต่อ</div><div style="font-size:0.8rem;color:var(--color-text-muted);">เตือนเมื่อไม่ได้เรียนนาน 3 วัน</div></div><label class="toggle-label"><input type="checkbox" checked onchange="showToast('อัปเดตการแจ้งเตือนแล้ว')"><span class="toggle-slider"></span></label></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;"><div><div style="font-weight:600;font-size:0.9375rem;">ตอบคำถาม Q&A</div><div style="font-size:0.8rem;color:var(--color-text-muted);">เมื่อผู้สอนตอบคำถามของคุณ</div></div><label class="toggle-label"><input type="checkbox" checked onchange="showToast('อัปเดตการแจ้งเตือนแล้ว')"><span class="toggle-slider"></span></label></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing Tab -->
+        <div id="tab-billing" class="settings-panel" style="display:none;">
+          <div class="card" style="padding:1.5rem;margin-bottom:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">💳 วิธีชำระเงินที่บันทึกไว้</h2>
+            <div style="display:flex;flex-direction:column;gap:0.875rem;margin-bottom:1.25rem;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem;border:1.5px solid var(--color-primary);border-radius:var(--radius-lg);background:rgba(202,137,95,0.04);">
+                <div style="display:flex;align-items:center;gap:0.875rem;">
+                  <span style="font-size:1.5rem;">💳</span>
+                  <div><div style="font-weight:700;">Visa ****4589</div><div style="font-size:0.8rem;color:var(--color-text-muted);">หมดอายุ 09/27 <span class="badge badge-active" style="margin-left:0.5rem;">ค่าเริ่มต้น</span></div></div>
+                </div>
+                <button onclick="showToast('ลบบัตรแล้ว','warning')" class="btn btn-ghost btn-sm" style="color:var(--color-danger);">ลบ</button>
+              </div>
+            </div>
+            <button onclick="showToast('เปิดฟอร์มเพิ่มบัตร')" class="btn btn-outline btn-sm">+ เพิ่มบัตรใหม่</button>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+              <h2 style="font-size:1rem;font-weight:800;">📄 ประวัติการชำระเงิน</h2>
+              <button onclick="showToast('ส่งออก PDF แล้ว')" class="btn btn-outline btn-sm">📤 ส่งออก</button>
+            </div>
+            <div class="table-wrapper">
+              <table class="table">
+                <thead><tr><th>วันที่</th><th>คอร์ส</th><th>จำนวน</th><th>สถานะ</th><th>ใบเสร็จ</th></tr></thead>
+                <tbody>
+                  <tr><td style="font-size:0.8rem;">25 ธ.ค. 2567</td><td style="font-size:0.875rem;max-width:200px;" class="truncate-1">Complete Web Dev Bootcamp</td><td style="font-weight:700;color:var(--color-success);">฿990</td><td><span class="badge badge-active">สำเร็จ</span></td><td><a href="receipt.html" class="table-action-btn primary">ดู</a></td></tr>
+                  <tr><td style="font-size:0.8rem;">10 ธ.ค. 2567</td><td style="font-size:0.875rem;max-width:200px;" class="truncate-1">React & Next.js Masterclass</td><td style="font-weight:700;color:var(--color-success);">฿1,490</td><td><span class="badge badge-active">สำเร็จ</span></td><td><a href="receipt.html" class="table-action-btn primary">ดู</a></td></tr>
+                  <tr><td style="font-size:0.8rem;">01 พ.ย. 2567</td><td style="font-size:0.875rem;max-width:200px;" class="truncate-1">Python for Data Science</td><td style="font-weight:700;color:var(--color-success);">฿790</td><td><span class="badge badge-active">สำเร็จ</span></td><td><a href="receipt.html" class="table-action-btn primary">ดู</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<style>
+.settings-nav-btn{display:flex;align-items:center;gap:0.75rem;width:100%;padding:0.875rem 1.25rem;text-align:left;background:none;border:none;cursor:pointer;font-size:0.9375rem;font-weight:600;color:var(--color-text);transition:all 0.15s;border-left:3px solid transparent;}
+.settings-nav-btn:hover{background:var(--color-gray-50);color:var(--color-primary);}
+.settings-nav-btn.active{background:rgba(202,137,95,0.08);color:var(--color-primary);border-left-color:var(--color-primary);}
+.toggle-label{position:relative;display:inline-block;width:48px;height:26px;cursor:pointer;flex-shrink:0;}
+.toggle-label input{opacity:0;width:0;height:0;}
+.toggle-slider{position:absolute;inset:0;background:var(--color-border);border-radius:99px;transition:all 0.2s;}
+.toggle-slider:before{content:'';position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+input:checked + .toggle-slider{background:var(--color-primary);}
+input:checked + .toggle-slider:before{transform:translateX(22px);}
+@media(max-width:900px){
+  #settingsLayout{grid-template-columns:1fr!important;}
+}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initSidebar();
+
+  function switchSettingsTab(tab) {
+    document.querySelectorAll('.settings-nav-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.settingsTab === tab);
+    });
+    document.querySelectorAll('.settings-panel').forEach(p => {
+      p.style.display = p.id === 'tab-' + tab ? '' : 'none';
+    });
+  }
+
+  function previewAvatar(input) {
+    if (!input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('avatarPreview').src = e.target.result;
+      document.getElementById('sidebarAvatar').src = e.target.result;
+      showToast('เปลี่ยนรูปโปรไฟล์แล้ว ✅', 'success');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  function togglePasswordVis(id) {
+    const el = document.getElementById(id);
+    el.type = el.type === 'password' ? 'text' : 'password';
+  }
+
+  function checkStrength(pwd) {
+    let score = 0;
+    if (pwd.length >= 8) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
+    if (/[^A-Za-z0-9]/.test(pwd)) score++;
+    const colors = ['', '#EF4444', '#F59E0B', '#3B82F6', '#10B981'];
+    const labels = ['', 'อ่อนมาก', 'อ่อน', 'ปานกลาง', 'แข็งแรง'];
+    for (let i = 1; i <= 4; i++) {
+      document.getElementById('bar' + i).style.background = i <= score ? colors[score] : 'var(--color-border)';
+    }
+    document.getElementById('strengthLabel').textContent = pwd ? labels[score] : '';
+    document.getElementById('strengthLabel').style.color = colors[score];
+  }
+
+  function changePassword() {
+    const cur = document.getElementById('currentPwd').value;
+    const nw = document.getElementById('newPwd').value;
+    const cn = document.getElementById('confirmPwd').value;
+    if (!cur || !nw || !cn) { showToast('กรุณากรอกข้อมูลให้ครบ', 'error'); return; }
+    if (nw !== cn) { showToast('รหัสผ่านใหม่ไม่ตรงกัน', 'error'); return; }
+    if (nw.length < 8) { showToast('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร', 'error'); return; }
+    showToast('เปลี่ยนรหัสผ่านเรียบร้อย ✅', 'success');
+    document.getElementById('currentPwd').value = '';
+    document.getElementById('newPwd').value = '';
+    document.getElementById('confirmPwd').value = '';
+  }
+</script>
+</body>
+</html>

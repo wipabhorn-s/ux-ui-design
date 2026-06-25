@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชำระเงิน | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);">
+
+<div id="nav-placeholder"></div>
+
+<div class="container" style="padding-top:2.5rem;padding-bottom:4rem;">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" style="margin-bottom:2rem;">
+    <div class="breadcrumb-item"><a href="index.html">หน้าหลัก</a></div>
+    <span class="breadcrumb-sep">›</span>
+    <div class="breadcrumb-item"><a href="course-detail.html">Course Detail</a></div>
+    <span class="breadcrumb-sep">›</span>
+    <div class="breadcrumb-item current">ชำระเงิน</div>
+  </div>
+
+  <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:2rem;">🛒 ชำระเงิน</h1>
+
+  <div style="display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:flex-start;" id="checkoutGrid">
+
+    <!-- LEFT: Payment Form -->
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <!-- Contact Info -->
+      <div class="card" style="padding:1.75rem;">
+        <h2 style="font-size:1.0625rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;">
+          <span style="width:28px;height:28px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">1</span>
+          ข้อมูลติดต่อ
+        </h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="form-group">
+            <label class="form-label">ชื่อ</label>
+            <input type="text" class="form-input" value="สมศักดิ์">
+          </div>
+          <div class="form-group">
+            <label class="form-label">นามสกุล</label>
+            <input type="text" class="form-input" value="รักเรียน">
+          </div>
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">อีเมล</label>
+            <input type="email" class="form-input" value="somsak@example.com">
+          </div>
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">เบอร์โทรศัพท์ (ไม่บังคับ)</label>
+            <input type="tel" class="form-input" placeholder="08x-xxx-xxxx">
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="card" style="padding:1.75rem;">
+        <h2 style="font-size:1.0625rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;">
+          <span style="width:28px;height:28px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">2</span>
+          วิธีชำระเงิน
+        </h2>
+
+        <!-- Payment Method Tabs -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.75rem;">
+          <button data-pay-method="credit-card" style="border:2px solid var(--color-primary);border-radius:var(--radius-lg);padding:0.875rem 0.5rem;text-align:center;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:all 0.15s;background:var(--color-primary-bg);">
+            <div style="font-size:1.5rem;margin-bottom:0.25rem;">💳</div>
+            บัตรเครดิต
+          </button>
+          <button data-pay-method="promptpay" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:0.875rem 0.5rem;text-align:center;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:all 0.15s;background:#fff;">
+            <div style="font-size:1.5rem;margin-bottom:0.25rem;">📱</div>
+            PromptPay
+          </button>
+          <button data-pay-method="truemoney" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:0.875rem 0.5rem;text-align:center;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:all 0.15s;background:#fff;">
+            <div style="font-size:1.5rem;margin-bottom:0.25rem;">🟠</div>
+            TrueMoney
+          </button>
+          <button data-pay-method="bank-transfer" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:0.875rem 0.5rem;text-align:center;font-size:0.8125rem;font-weight:600;cursor:pointer;transition:all 0.15s;background:#fff;">
+            <div style="font-size:1.5rem;margin-bottom:0.25rem;">🏦</div>
+            โอนเงิน
+          </button>
+        </div>
+
+        <!-- Credit Card Form -->
+        <div id="paySection-credit-card">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label form-label-required">หมายเลขบัตร</label>
+              <div class="form-input-icon">
+                <span class="input-icon">💳</span>
+                <input type="text" class="form-input" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label form-label-required">ชื่อบนบัตร</label>
+              <input type="text" class="form-input" placeholder="SOMSAK RAKREAN" style="text-transform:uppercase;">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label class="form-label form-label-required">วันหมดอายุ</label>
+                <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY" maxlength="5">
+              </div>
+              <div class="form-group">
+                <label class="form-label form-label-required">CVV</label>
+                <div class="form-input-icon">
+                  <span class="input-icon">🔒</span>
+                  <input type="password" class="form-input" id="cardCvv" placeholder="•••" maxlength="4">
+                </div>
+              </div>
+            </div>
+            <label class="checkbox-group">
+              <input type="checkbox">
+              <span class="checkbox-label">บันทึกบัตรสำหรับการชำระเงินครั้งหน้า</span>
+            </label>
+          </div>
+
+          <!-- Accepted Cards -->
+          <div style="display:flex;align-items:center;gap:0.5rem;margin-top:1.25rem;flex-wrap:wrap;">
+            <span style="font-size:0.8rem;color:var(--color-text-muted);">รับ:</span>
+            <span style="background:var(--color-gray-100);border-radius:var(--radius-sm);padding:0.25rem 0.625rem;font-size:0.75rem;font-weight:700;color:#1A1F71;">VISA</span>
+            <span style="background:var(--color-gray-100);border-radius:var(--radius-sm);padding:0.25rem 0.625rem;font-size:0.75rem;font-weight:700;color:#EB001B;">Mastercard</span>
+            <span style="background:var(--color-gray-100);border-radius:var(--radius-sm);padding:0.25rem 0.625rem;font-size:0.75rem;font-weight:700;color:#007BC0;">AMEX</span>
+            <span style="background:var(--color-gray-100);border-radius:var(--radius-sm);padding:0.25rem 0.625rem;font-size:0.75rem;font-weight:700;color:#1A1F71;">JCB</span>
+          </div>
+        </div>
+
+        <!-- PromptPay -->
+        <div id="paySection-promptpay" style="display:none;text-align:center;padding:1.5rem;">
+          <div style="width:160px;height:160px;background:var(--color-gray-100);border-radius:var(--radius-xl);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:4rem;">📱</div>
+          <p style="font-size:0.9rem;color:var(--color-text);font-weight:600;margin-bottom:0.5rem;">สแกน QR Code ผ่าน Mobile Banking</p>
+          <p style="font-size:0.8125rem;color:var(--color-text-muted);">QR Code จะแสดงหลังกด "ยืนยันคำสั่งซื้อ"</p>
+        </div>
+
+        <!-- TrueMoney -->
+        <div id="paySection-truemoney" style="display:none;padding:1.5rem 0;">
+          <div class="form-group">
+            <label class="form-label form-label-required">หมายเลขโทรศัพท์ (TrueMoney Wallet)</label>
+            <div class="form-input-icon">
+              <span class="input-icon">📱</span>
+              <input type="tel" class="form-input" placeholder="0xx-xxx-xxxx">
+            </div>
+          </div>
+          <p style="font-size:0.8125rem;color:var(--color-text-muted);margin-top:0.5rem;">คุณจะได้รับ OTP เพื่อยืนยันการชำระเงิน</p>
+        </div>
+
+        <!-- Bank Transfer -->
+        <div id="paySection-bank-transfer" style="display:none;padding:1.5rem;background:var(--color-gray-50);border-radius:var(--radius-lg);">
+          <p style="font-size:0.875rem;font-weight:700;margin-bottom:1rem;">โอนเงินมาที่บัญชีนี้:</p>
+          <div style="display:flex;flex-direction:column;gap:0.625rem;font-size:0.875rem;">
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ธนาคาร:</span><strong>กสิกรไทย (KBank)</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">เลขบัญชี:</span><strong>123-4-56789-0</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ชื่อบัญชี:</span><strong>LearnHub Co., Ltd.</strong></div>
+            <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">จำนวนเงิน:</span><strong style="color:var(--color-primary);">฿1,990</strong></div>
+          </div>
+          <div class="form-group" style="margin-top:1.25rem;">
+            <label class="form-label">แนบสลิปการโอนเงิน</label>
+            <div style="border:2px dashed var(--color-border);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--color-primary)'" onmouseout="this.style.borderColor='var(--color-border)'">
+              <p style="font-size:0.875rem;color:var(--color-text-muted);">📤 คลิกเพื่ออัปโหลดสลิป</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billing Address -->
+      <div class="card" style="padding:1.75rem;">
+        <h2 style="font-size:1.0625rem;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;">
+          <span style="width:28px;height:28px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">3</span>
+          ที่อยู่สำหรับใบกำกับภาษี (ไม่บังคับ)
+        </h2>
+        <label class="checkbox-group" style="margin-bottom:1rem;">
+          <input type="checkbox" id="needTaxInvoice" onchange="toggleTaxInvoice(this)">
+          <span class="checkbox-label">ต้องการใบกำกับภาษี</span>
+        </label>
+        <div id="taxInvoiceSection" style="display:none;">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">ชื่อ/บริษัท</label>
+              <input type="text" class="form-input" placeholder="ชื่อหรือบริษัทของคุณ">
+            </div>
+            <div class="form-group">
+              <label class="form-label">เลขประจำตัวผู้เสียภาษี</label>
+              <input type="text" class="form-input" placeholder="0000000000000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ที่อยู่</label>
+              <textarea class="form-textarea" style="min-height:80px;" placeholder="ที่อยู่สำหรับใบกำกับภาษี"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Order Summary -->
+    <div>
+      <div class="card" style="padding:1.5rem;position:sticky;top:80px;">
+        <h2 style="font-size:1.0625rem;font-weight:700;margin-bottom:1.25rem;">📋 สรุปคำสั่งซื้อ</h2>
+
+        <!-- Course Item -->
+        <div style="display:flex;gap:0.875rem;padding-bottom:1.25rem;border-bottom:1px solid var(--color-border);margin-bottom:1.25rem;">
+          <img src="https://picsum.photos/seed/web1/120/68" alt="" style="width:80px;height:54px;border-radius:var(--radius-md);object-fit:cover;flex-shrink:0;">
+          <div>
+            <h3 style="font-size:0.875rem;font-weight:700;line-height:1.4;color:var(--color-text);">Complete Web Development Bootcamp 2024</h3>
+            <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:0.25rem;">Sarah Johnson • 52h • 289 บทเรียน</p>
+          </div>
+        </div>
+
+        <!-- Promo Code -->
+        <div style="margin-bottom:1.25rem;">
+          <div style="display:flex;gap:0.5rem;">
+            <input type="text" class="form-input" placeholder="โค้ดส่วนลด" id="promoCode" style="flex:1;font-size:0.875rem;">
+            <button class="btn btn-outline btn-sm" id="applyPromoBtn">ใช้โค้ด</button>
+          </div>
+          <p style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.375rem;">ลอง: LEARN20 หรือ FIRST50</p>
+        </div>
+
+        <!-- Price Breakdown -->
+        <div style="display:flex;flex-direction:column;gap:0.625rem;margin-bottom:1.25rem;font-size:0.9rem;">
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ราคาเต็ม</span><span style="text-decoration:line-through;color:var(--color-text-muted);">฿3,990</span></div>
+          <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ส่วนลด 50%</span><span style="color:var(--color-success);">-฿2,000</span></div>
+          <div style="display:flex;justify-content:space-between;" id="promoDiscount" style="display:none;"><span style="color:var(--color-text-muted);">โค้ดส่วนลด</span><span style="color:var(--color-success);"></span></div>
+        </div>
+
+        <div style="border-top:2px solid var(--color-border);padding-top:1rem;margin-bottom:1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-weight:800;font-size:1rem;">ยอดชำระทั้งหมด</span>
+            <span style="font-size:1.5rem;font-weight:900;color:var(--color-primary);" id="orderTotal">฿1,990</span>
+          </div>
+          <p style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.375rem;">รวม VAT 7% แล้ว</p>
+        </div>
+
+        <a href="payment-success.html" class="btn btn-primary btn-block btn-lg" style="margin-bottom:0.875rem;">
+          🔒 ยืนยันและชำระเงิน
+        </a>
+
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:1rem;">
+          <span style="font-size:0.8rem;color:var(--color-text-muted);">🔒 การชำระเงินปลอดภัย 100%</span>
+        </div>
+
+        <div style="text-align:center;padding-top:1rem;border-top:1px solid var(--color-border);">
+          <p style="font-size:0.8rem;color:var(--color-text-muted);">✅ ยินดีคืนเงินภายใน 30 วัน</p>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);">📱 เข้าถึงได้ตลอดชีพ ทุกอุปกรณ์</p>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);">🏆 Certificate เมื่อเรียนจบ</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<style>
+@media(max-width:900px){#checkoutGrid{grid-template-columns:1fr!important;}}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initPage({ type: 'public' });
+
+  function toggleTaxInvoice(cb) {
+    document.getElementById('taxInvoiceSection').style.display = cb.checked ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>

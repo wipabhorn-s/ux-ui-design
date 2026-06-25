@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชำระเงินไม่สำเร็จ | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);min-height:100vh;display:flex;flex-direction:column;">
+
+<div id="nav-placeholder"></div>
+
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1rem;">
+  <div style="max-width:520px;width:100%;text-align:center;">
+
+    <!-- Error Icon -->
+    <div style="width:100px;height:100px;background:var(--color-danger-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;animation:shakeIn 0.5s ease;">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="15" y1="9" x2="9" y2="15"/>
+        <line x1="9" y1="9" x2="15" y2="15"/>
+      </svg>
+    </div>
+
+    <h1 style="font-size:2rem;font-weight:900;color:var(--color-text);margin-bottom:0.75rem;">ชำระเงินไม่สำเร็จ 😞</h1>
+    <p style="font-size:1rem;color:var(--color-text-muted);margin-bottom:2rem;line-height:1.6;">ขออภัย การชำระเงินของคุณไม่ผ่านในครั้งนี้ ไม่ต้องกังวล ยังไม่มีการหักเงินจากบัญชีของคุณ</p>
+
+    <!-- Error Reason -->
+    <div class="alert alert-danger" style="margin-bottom:2rem;text-align:left;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>
+        <p style="font-weight:700;margin-bottom:0.25rem;">สาเหตุที่เป็นไปได้:</p>
+        <ul style="font-size:0.875rem;display:flex;flex-direction:column;gap:0.25rem;margin-top:0.5rem;">
+          <li>• วงเงินบัตรไม่เพียงพอ</li>
+          <li>• ข้อมูลบัตรไม่ถูกต้อง (หมายเลข / วันหมดอายุ / CVV)</li>
+          <li>• ธนาคารปิดกั้นการทำรายการ</li>
+          <li>• เครือข่ายขัดข้องชั่วคราว</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Order Reference -->
+    <div class="card" style="padding:1.5rem;margin-bottom:2rem;text-align:left;">
+      <div style="display:flex;flex-direction:column;gap:0.625rem;font-size:0.875rem;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">หมายเลขอ้างอิง</span><strong>#ORD-2024-12848</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">วันที่</span><strong>25 ธ.ค. 2024, 14:35 น.</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">คอร์ส</span><strong>Complete Web Dev Bootcamp</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ยอดที่พยายามชำระ</span><strong>฿1,990</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">สถานะ</span><span class="badge badge-danger">ล้มเหลว</span></div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div style="background:var(--color-accent-mint-bg);border:1px solid var(--color-accent-mint-dark);border-radius:var(--radius-xl);padding:1.25rem;margin-bottom:2rem;text-align:left;">
+      <h3 style="font-size:0.875rem;font-weight:700;color:#166534;margin-bottom:0.75rem;">💡 วิธีแก้ไข:</h3>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;font-size:0.8625rem;color:#166534;">
+        <div>✓ ตรวจสอบข้อมูลบัตรให้ถูกต้อง</div>
+        <div>✓ ติดต่อธนาคารเพื่อเพิ่มวงเงิน</div>
+        <div>✓ ลองใช้บัตรหรือวิธีชำระเงินอื่น</div>
+        <div>✓ ลองอีกครั้งหลังจาก 5-10 นาที</div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div style="display:flex;flex-direction:column;gap:0.875rem;">
+      <a href="checkout.html" class="btn btn-primary btn-block btn-xl">
+        🔄 ลองชำระเงินอีกครั้ง
+      </a>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="course-detail.html" class="btn btn-outline" style="flex:1;">← กลับหน้าคอร์ส</a>
+        <button onclick="showToast('ทีมงานจะติดต่อกลับภายใน 24 ชั่วโมง 📞','info')" class="btn btn-ghost" style="flex:1;">📞 ติดต่อ Support</button>
+      </div>
+    </div>
+
+    <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:1.5rem;">
+      ต้องการความช่วยเหลือ? <a href="#" style="color:var(--color-primary);font-weight:600;">แชทกับเรา</a> หรือ Line: @learnhub
+    </p>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<style>
+@keyframes shakeIn { 0%,100% { transform: scale(1); } 25% { transform: scale(1.1) rotate(-5deg); } 75% { transform: scale(1.05) rotate(5deg); } }
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initPage({ type: 'auth', noFooter: true });
+</script>
+</body>
+</html>

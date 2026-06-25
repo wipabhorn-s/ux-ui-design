@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ใบประกาศนียบัตร | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="certificate-page">
+
+<!-- Action Bar (no-print) -->
+<div class="no-print" style="background:#fff;border-bottom:1px solid var(--color-border);padding:0.875rem 0;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <a href="my-courses.html" style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;color:var(--color-text-muted);">← กลับ</a>
+      <div style="width:1px;height:20px;background:var(--color-border);"></div>
+      <div>
+        <h1 style="font-size:1rem;font-weight:700;color:var(--color-text);">ใบประกาศนียบัตร</h1>
+        <p style="font-size:0.8rem;color:var(--color-text-muted);">Complete Web Development Bootcamp 2024</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button id="printCertBtn" class="btn btn-primary btn-sm">🖨 พิมพ์ / PDF</button>
+      <button id="downloadCertBtn" class="btn btn-outline btn-sm">⬇ ดาวน์โหลด</button>
+      <button onclick="showToast('คัดลอกลิงก์แล้ว! 🔗')" class="btn btn-ghost btn-sm">🔗 แชร์</button>
+    </div>
+  </div>
+</div>
+
+<!-- Certificates List (no-print) -->
+<div class="no-print container" style="padding-top:1.5rem;margin-bottom:1.5rem;">
+  <div style="display:flex;gap:0.75rem;overflow-x:auto;padding-bottom:0.5rem;" id="certList">
+    <!-- Rendered by JS -->
+  </div>
+</div>
+
+<!-- Certificate Document -->
+<div class="container" style="padding-bottom:3rem;">
+  <div class="certificate-card" id="certCard">
+    <!-- Decorative elements -->
+    <div class="cert-decorations">
+      <div class="cert-corner tl"></div>
+      <div class="cert-corner tr"></div>
+      <div class="cert-corner bl"></div>
+      <div class="cert-corner br"></div>
+      <!-- Decorative circles -->
+      <div style="position:absolute;top:50%;left:-80px;transform:translateY(-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(202,137,95,0.05) 0%,transparent 70%);pointer-events:none;"></div>
+      <div style="position:absolute;top:50%;right:-80px;transform:translateY(-50%);width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(195,190,247,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+    </div>
+
+    <div class="certificate-border-outer"></div>
+    <div class="certificate-border-inner"></div>
+
+    <div class="certificate-body">
+      <!-- Platform -->
+      <div class="cert-platform">LearnHub · Online Learning Platform</div>
+
+      <!-- Logo -->
+      <div class="cert-logo">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style="display:inline-block;vertical-align:middle;margin-right:8px;"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M22 14l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        LearnHub
+      </div>
+
+      <!-- Divider -->
+      <div style="width:80px;height:3px;background:linear-gradient(to right,var(--color-surface-warm),var(--color-primary),var(--color-surface-warm));border-radius:2px;margin:0 auto 2rem;"></div>
+
+      <!-- Heading -->
+      <div class="cert-heading" style="font-family:'Playfair Display',Georgia,serif;">Certificate of Completion</div>
+      <div class="cert-sub">ขอมอบใบประกาศนียบัตรนี้แด่</div>
+
+      <!-- Student Name -->
+      <div class="cert-name" id="certStudentName">สมศักดิ์ รักเรียน</div>
+
+      <!-- Course -->
+      <div class="cert-course-label">สำเร็จการศึกษาหลักสูตร</div>
+      <div class="cert-course-name" id="certCourseName">Complete Web Development Bootcamp 2024</div>
+
+      <!-- Details -->
+      <div style="display:flex;justify-content:center;gap:3rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+        <div style="text-align:center;">
+          <div style="font-size:0.75rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;">ระยะเวลา</div>
+          <div style="font-size:0.875rem;font-weight:700;">52 ชั่วโมง</div>
+        </div>
+        <div style="width:1px;background:var(--color-border);"></div>
+        <div style="text-align:center;">
+          <div style="font-size:0.75rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;">คะแนนสอบ</div>
+          <div style="font-size:0.875rem;font-weight:700;color:var(--color-success);">92%</div>
+        </div>
+        <div style="width:1px;background:var(--color-border);"></div>
+        <div style="text-align:center;">
+          <div style="font-size:0.75rem;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;">ระดับ</div>
+          <div style="font-size:0.875rem;font-weight:700;">Beginner → Advanced</div>
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div class="cert-date" id="certDate">วันที่ 25 ธันวาคม พ.ศ. 2567</div>
+
+      <!-- Divider -->
+      <div style="width:120px;height:1px;background:var(--color-border);margin:0 auto 2.5rem;"></div>
+
+      <!-- Signatures -->
+      <div class="cert-signatures">
+        <div>
+          <div style="font-size:1.25rem;font-family:'Playfair Display',Georgia,serif;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;font-style:italic;">Sarah Johnson</div>
+          <div class="cert-sig-name">Sarah Johnson</div>
+          <div class="cert-sig-title">ผู้สอน · Senior Full-Stack Developer</div>
+        </div>
+        <div>
+          <div style="font-size:1.25rem;font-family:'Playfair Display',Georgia,serif;font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;font-style:italic;">LearnHub</div>
+          <div class="cert-sig-name">LearnHub Platform</div>
+          <div class="cert-sig-title">ผู้จัด · LearnHub Co., Ltd.</div>
+        </div>
+      </div>
+
+      <!-- Certificate ID -->
+      <div class="cert-id">
+        <span>Certificate ID: LH-2024-WEB-847293</span>
+        <span style="margin:0 0.75rem;">•</span>
+        <span>ตรวจสอบที่: learnhub.th/verify/LH-2024-WEB-847293</span>
+      </div>
+
+      <!-- Seal -->
+      <div style="position:absolute;bottom:2rem;right:3rem;opacity:0.12;">
+        <div style="width:80px;height:80px;border-radius:50%;border:3px solid var(--color-primary);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+          <div style="font-size:0.6rem;font-weight:800;letter-spacing:0.1em;text-align:center;color:var(--color-primary);">LEARN<br>HUB<br>✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share Options (no-print) -->
+  <div class="no-print" style="text-align:center;margin-top:2rem;">
+    <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1rem;">แชร์ความสำเร็จของคุณ!</p>
+    <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+      <button onclick="showToast('แชร์ไป LinkedIn แล้ว 🎉')" class="btn btn-outline btn-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#0A66C2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </button>
+      <button onclick="showToast('แชร์ไป Facebook แล้ว')" class="btn btn-outline btn-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </button>
+      <button onclick="showToast('คัดลอก URL แล้ว 🔗')" class="btn btn-outline btn-sm">🔗 คัดลอก URL</button>
+    </div>
+  </div>
+
+  <!-- Other Certificates (no-print) -->
+  <div class="no-print" style="margin-top:3rem;">
+    <h2 style="font-size:1.125rem;font-weight:800;margin-bottom:1.25rem;">ใบประกาศนียบัตรทั้งหมดของคุณ</h2>
+    <div class="grid-3" id="allCerts"></div>
+  </div>
+</div>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initCertificateActions();
+
+  // Render other certificates
+  const completedCourses = MOCK.myCourses.filter(c => c.status === 'completed');
+  const allCerts = document.getElementById('allCerts');
+  if (allCerts) {
+    allCerts.innerHTML = completedCourses.map(c => `
+      <div class="card" style="padding:1.25rem;cursor:pointer;" onclick="loadCert('${c.id}')">
+        <div style="aspect-ratio:16/9;background:#111;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:0.875rem;">
+          <img src="${c.thumbnail}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.8;">
+        </div>
+        <h3 style="font-size:0.875rem;font-weight:700;line-height:1.4;margin-bottom:0.375rem;" class="truncate-2">${c.title}</h3>
+        <p style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:0.875rem;">${c.instructor}</p>
+        <div style="display:flex;gap:0.5rem;">
+          <button onclick="event.stopPropagation();window.print()" class="btn btn-primary btn-sm" style="flex:1;">🖨 พิมพ์</button>
+          <button onclick="event.stopPropagation();showToast('ดาวน์โหลดแล้ว 📄')" class="btn btn-outline btn-sm">⬇</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function loadCert(id) {
+    const course = getCourse(id);
+    if (course) {
+      document.getElementById('certCourseName').textContent = course.title;
+      showToast('โหลดใบประกาศนียบัตรแล้ว');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+</script>
+</body>
+</html>

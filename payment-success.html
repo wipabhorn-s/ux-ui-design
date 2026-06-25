@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชำระเงินสำเร็จ | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);min-height:100vh;display:flex;flex-direction:column;">
+
+<div id="nav-placeholder"></div>
+
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1rem;">
+  <div style="max-width:560px;width:100%;text-align:center;">
+
+    <!-- Success Animation -->
+    <div style="position:relative;margin-bottom:2rem;">
+      <div style="width:100px;height:100px;background:var(--color-success-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto;animation:popIn 0.5s ease;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <!-- Confetti dots -->
+      <div style="position:absolute;top:-10px;left:50%;margin-left:-60px;font-size:1.5rem;animation:float 2s ease-in-out infinite;">🎉</div>
+      <div style="position:absolute;top:0;right:40%;font-size:1.25rem;animation:float 2.5s ease-in-out infinite 0.3s;">⭐</div>
+      <div style="position:absolute;top:-5px;left:35%;font-size:1rem;animation:float 2s ease-in-out infinite 0.6s;">✨</div>
+    </div>
+
+    <h1 style="font-size:2rem;font-weight:900;color:var(--color-text);margin-bottom:0.75rem;">ชำระเงินสำเร็จ! 🎊</h1>
+    <p style="font-size:1.0625rem;color:var(--color-text-muted);margin-bottom:2rem;line-height:1.6;">ขอบคุณที่ไว้วางใจ LearnHub! ตอนนี้คุณเข้าถึงคอร์สได้เลย ขอให้สนุกกับการเรียนรู้ครับ</p>
+
+    <!-- Order Details Card -->
+    <div class="card" style="padding:1.75rem;text-align:left;margin-bottom:2rem;">
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <span class="badge badge-success badge-lg">✅ ชำระเงินแล้ว</span>
+      </div>
+
+      <div style="display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.25rem;border-bottom:1px solid var(--color-border);margin-bottom:1.25rem;">
+        <img src="https://picsum.photos/seed/web1/120/68" alt="" style="width:80px;height:54px;border-radius:var(--radius-md);object-fit:cover;">
+        <div>
+          <h3 style="font-size:0.9375rem;font-weight:700;color:var(--color-text);line-height:1.4;">Complete Web Development Bootcamp 2024</h3>
+          <p style="font-size:0.8rem;color:var(--color-text-muted);margin-top:0.25rem;">Sarah Johnson</p>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:0.625rem;font-size:0.875rem;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">หมายเลขคำสั่งซื้อ</span><strong>#ORD-2024-12847</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">วันที่ชำระเงิน</span><strong>25 ธ.ค. 2024, 14:32 น.</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">วิธีชำระ</span><strong>💳 Visa •••• 4242</strong></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--color-text-muted);">ยอดชำระ</span><strong style="font-size:1.0625rem;color:var(--color-primary);">฿1,990</strong></div>
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div style="background:var(--color-surface-warm-bg);border-radius:var(--radius-xl);padding:1.5rem;margin-bottom:2rem;text-align:left;">
+      <h3 style="font-size:0.9375rem;font-weight:700;margin-bottom:1rem;">ขั้นตอนต่อไป:</h3>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;">
+          <div style="width:32px;height:32px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">1</div>
+          <span>ตรวจสอบอีเมลยืนยันที่ somsak@example.com</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;">
+          <div style="width:32px;height:32px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">2</div>
+          <span>คลิก "เริ่มเรียน" เพื่อเข้าสู่บทเรียนแรก</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.9rem;">
+          <div style="width:32px;height:32px;background:var(--color-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:800;flex-shrink:0;">3</div>
+          <span>ดาวน์โหลดแอปเพื่อเรียนออฟไลน์</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div style="display:flex;flex-direction:column;gap:0.875rem;">
+      <a href="course-player.html" class="btn btn-primary btn-block btn-xl">
+        ▶ เริ่มเรียนเลย!
+      </a>
+      <div style="display:flex;gap:0.75rem;">
+        <a href="receipt.html" class="btn btn-outline" style="flex:1;">📄 ดูใบเสร็จ</a>
+        <a href="my-courses.html" class="btn btn-ghost" style="flex:1;">📚 คอร์สของฉัน</a>
+      </div>
+      <a href="index.html" style="font-size:0.875rem;color:var(--color-text-muted);text-align:center;padding:0.5rem;">← กลับหน้าหลัก</a>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<style>
+@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(10deg); } }
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initPage({ type: 'auth', noFooter: true });
+  setTimeout(() => showToast('ส่งอีเมลยืนยันไปที่ somsak@example.com แล้ว 📧'), 1000);
+</script>
+</body>
+</html>

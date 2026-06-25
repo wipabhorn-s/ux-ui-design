@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สร้างคอร์สใหม่ | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);">
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="dashSidebar">
+  <div class="sidebar-logo">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    LearnHub
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">ผู้สอน</div>
+    <a href="instructor-dashboard.html" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="create-course.html" class="sidebar-link active">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      สร้างคอร์สใหม่
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      คอร์สของฉัน
+    </a>
+    <a href="profile.html" class="sidebar-link">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      ตั้งค่าบัญชี
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar"><img src="https://ui-avatars.com/api/?name=Sarah+J&background=CA895F&color=fff&size=72" alt=""></div>
+      <div><div class="sidebar-user-name">Sarah Johnson</div><div class="sidebar-user-role">ผู้สอน</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="dashboard-layout">
+  <header class="dash-header">
+    <div class="dash-header-left">
+      <button class="navbar-icon-btn dash-mobile-toggle" id="sidebarToggle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="dash-breadcrumb"><a href="instructor-dashboard.html">Dashboard</a><span>›</span><span>สร้างคอร์สใหม่</span></div>
+    </div>
+    <div class="dash-header-right">
+      <button id="saveDraftBtn" class="btn btn-outline btn-sm" onclick="showToast('บันทึก Draft แล้ว 💾')">💾 บันทึก Draft</button>
+      <img src="https://ui-avatars.com/api/?name=Sarah+J&background=CA895F&color=fff&size=72" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--color-border);" alt="">
+    </div>
+  </header>
+
+  <main class="dash-content">
+    <!-- Page Title -->
+    <div style="margin-bottom:1.75rem;">
+      <h1 class="dash-page-title">✏️ สร้างคอร์สใหม่</h1>
+      <p class="dash-page-subtitle">กรอกข้อมูลให้ครบถ้วนเพื่อเผยแพร่คอร์สของคุณ</p>
+    </div>
+
+    <!-- Step Indicator -->
+    <div class="multistep-indicator" id="stepIndicator">
+      <div class="step-item active" data-step="1">
+        <div class="step-circle">1</div>
+        <div class="step-label">ข้อมูลพื้นฐาน</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item" data-step="2">
+        <div class="step-circle">2</div>
+        <div class="step-label">ภาพ / มีเดีย</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item" data-step="3">
+        <div class="step-circle">3</div>
+        <div class="step-label">ราคา</div>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item" data-step="4">
+        <div class="step-circle">4</div>
+        <div class="step-label">หลักสูตร</div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Basic Info -->
+    <div id="step1" class="create-course-step">
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:1.5rem;">
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">📝 ข้อมูลหลักสูตร</h2>
+            <div class="form-group">
+              <label class="form-label">ชื่อคอร์ส <span style="color:var(--color-danger);">*</span></label>
+              <input type="text" id="courseTitle" class="form-input" placeholder="เช่น Complete Web Development Bootcamp 2024" maxlength="120">
+              <span class="form-hint">0/120 ตัวอักษร</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">คำอธิบายสั้น <span style="color:var(--color-danger);">*</span></label>
+              <textarea id="courseSubtitle" class="form-textarea" rows="2" placeholder="บอกผู้เรียนว่าจะได้เรียนรู้อะไร (1-2 ประโยค)" maxlength="200"></textarea>
+              <span class="form-hint">0/200 ตัวอักษร</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">รายละเอียดคอร์ส <span style="color:var(--color-danger);">*</span></label>
+              <textarea id="courseDesc" class="form-textarea" rows="6" placeholder="อธิบายเนื้อหาคอร์สอย่างละเอียด..."></textarea>
+            </div>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">🎯 สิ่งที่ผู้เรียนจะได้รับ</h2>
+            <div id="whatYouLearnList" style="display:flex;flex-direction:column;gap:0.625rem;margin-bottom:0.875rem;">
+              <div class="learn-item" style="display:flex;gap:0.5rem;">
+                <input type="text" class="form-input" placeholder="เช่น เขียน React ได้อย่างมืออาชีพ" style="flex:1;">
+                <button onclick="removeLearningItem(this)" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0 0.375rem;">×</button>
+              </div>
+              <div class="learn-item" style="display:flex;gap:0.5rem;">
+                <input type="text" class="form-input" placeholder="เช่น สร้าง Full-stack App ได้เอง" style="flex:1;">
+                <button onclick="removeLearningItem(this)" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0 0.375rem;">×</button>
+              </div>
+            </div>
+            <button onclick="addLearningItem()" class="btn btn-outline btn-sm">+ เพิ่มรายการ</button>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">⚙️ ตั้งค่าคอร์ส</h2>
+            <div class="form-group">
+              <label class="form-label">หมวดหมู่</label>
+              <select class="form-select">
+                <option value="">เลือกหมวดหมู่</option>
+                <option>การพัฒนาเว็บ</option>
+                <option>UI/UX Design</option>
+                <option>Python & Data Science</option>
+                <option>Mobile Development</option>
+                <option>DevOps & Cloud</option>
+                <option>Business & Marketing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ระดับความยาก</label>
+              <select class="form-select">
+                <option>ผู้เริ่มต้น</option>
+                <option>ระดับกลาง</option>
+                <option>ระดับสูง</option>
+                <option>ทุกระดับ</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ภาษา</label>
+              <select class="form-select">
+                <option>ภาษาไทย</option>
+                <option>English</option>
+                <option>Thai + English</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">แท็ก (คั่นด้วยจุลภาค)</label>
+              <input type="text" class="form-input" placeholder="react, javascript, web development">
+            </div>
+          </div>
+
+          <div class="card" style="padding:1.5rem;">
+            <h2 style="font-size:1rem;font-weight:800;margin-bottom:1rem;">✅ ข้อกำหนดเบื้องต้น</h2>
+            <div id="requirementsList" style="display:flex;flex-direction:column;gap:0.625rem;margin-bottom:0.875rem;">
+              <div style="display:flex;gap:0.5rem;">
+                <input type="text" class="form-input" placeholder="เช่น รู้จัก HTML/CSS เบื้องต้น" style="flex:1;">
+                <button onclick="this.closest('div').remove()" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0 0.375rem;">×</button>
+              </div>
+            </div>
+            <button onclick="addRequirement()" class="btn btn-outline btn-sm">+ เพิ่ม</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Media -->
+    <div id="step2" class="create-course-step" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="padding:1.5rem;">
+          <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">🖼 ภาพปกคอร์ส</h2>
+          <div class="upload-zone" id="thumbnailZone" onclick="document.getElementById('thumbnailInput').click()" style="cursor:pointer;">
+            <input type="file" id="thumbnailInput" accept="image/*" style="display:none;" onchange="previewThumbnail(this)">
+            <div id="thumbnailPreview" style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+              <span style="font-size:2.5rem;">📸</span>
+              <div style="text-align:center;">
+                <p style="font-weight:700;color:var(--color-primary);">คลิกเพื่ออัปโหลด</p>
+                <p style="font-size:0.8rem;color:var(--color-text-muted);">PNG, JPG, GIF ขนาดสูงสุด 2MB</p>
+                <p style="font-size:0.75rem;color:var(--color-text-muted);">แนะนำ: 1280 × 720 px (16:9)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:1.5rem;">
+          <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">🎬 วิดีโอตัวอย่าง</h2>
+          <div class="upload-zone" id="videoZone" onclick="document.getElementById('videoInput').click()" style="cursor:pointer;">
+            <input type="file" id="videoInput" accept="video/*" style="display:none;" onchange="showToast('อัปโหลดวิดีโอแล้ว 🎬')">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:0.75rem;">
+              <span style="font-size:2.5rem;">🎥</span>
+              <div style="text-align:center;">
+                <p style="font-weight:700;color:var(--color-primary);">คลิกเพื่ออัปโหลด</p>
+                <p style="font-size:0.8rem;color:var(--color-text-muted);">MP4, MOV ขนาดสูงสุด 500MB</p>
+                <p style="font-size:0.75rem;color:var(--color-text-muted);">หรือวาง YouTube / Vimeo URL ด้านล่าง</p>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:1rem;position:relative;">
+            <span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);font-size:0.875rem;">🔗</span>
+            <input type="url" class="form-input" placeholder="https://youtube.com/watch?v=..." style="padding-left:2.25rem;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Intro Text -->
+      <div class="card" style="padding:1.5rem;margin-top:1.5rem;background:var(--color-accent-mint-bg);border:1.5px solid var(--color-accent-mint-dark);">
+        <div style="display:flex;gap:1rem;align-items:flex-start;">
+          <span style="font-size:1.5rem;flex-shrink:0;">💡</span>
+          <div>
+            <h3 style="font-size:0.9375rem;font-weight:700;color:#166534;margin-bottom:0.375rem;">เคล็ดลับภาพปก</h3>
+            <p style="font-size:0.875rem;color:#166534;line-height:1.6;">ภาพปกคุณภาพสูงช่วยเพิ่มอัตราการคลิกคอร์สได้ถึง 3 เท่า ใช้ภาพที่สื่อถึงเนื้อหาคอร์สชัดเจน ไม่มีตัวหนังสือซ้อนทับมาก และมีพื้นหลังที่ชัดเจน</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: Pricing -->
+    <div id="step3" class="create-course-step" style="display:none;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="card" style="padding:1.5rem;">
+          <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">💰 ตั้งราคาคอร์ส</h2>
+          <div class="form-group">
+            <label class="form-label">ประเภทราคา</label>
+            <div style="display:flex;gap:0.75rem;margin-bottom:1.25rem;">
+              <label style="flex:1;display:block;cursor:pointer;">
+                <input type="radio" name="priceType" value="paid" style="display:none;" onchange="togglePricingType('paid')" checked>
+                <div id="paidOption" class="pricing-option active" style="border:2px solid var(--color-primary);border-radius:var(--radius-lg);padding:1rem;text-align:center;">
+                  <div style="font-size:1.5rem;margin-bottom:0.375rem;">💳</div>
+                  <div style="font-weight:700;font-size:0.9375rem;color:var(--color-primary);">มีค่าใช้จ่าย</div>
+                </div>
+              </label>
+              <label style="flex:1;display:block;cursor:pointer;">
+                <input type="radio" name="priceType" value="free" style="display:none;" onchange="togglePricingType('free')">
+                <div id="freeOption" class="pricing-option" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:1rem;text-align:center;">
+                  <div style="font-size:1.5rem;margin-bottom:0.375rem;">🎁</div>
+                  <div style="font-weight:700;font-size:0.9375rem;color:var(--color-text-muted);">ฟรี</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div id="pricingFields">
+            <div class="form-group">
+              <label class="form-label">ราคาปกติ (บาท)</label>
+              <div style="position:relative;">
+                <span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);font-weight:600;color:var(--color-text-muted);">฿</span>
+                <input type="number" id="regularPrice" class="form-input" placeholder="0" style="padding-left:2rem;" value="1990">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ราคาโปรโมชัน (บาท) <span style="font-size:0.75rem;color:var(--color-text-muted);">(ไม่บังคับ)</span></label>
+              <div style="position:relative;">
+                <span style="position:absolute;left:0.875rem;top:50%;transform:translateY(-50%);font-weight:600;color:var(--color-text-muted);">฿</span>
+                <input type="number" id="promoPrice" class="form-input" placeholder="0" style="padding-left:2rem;" value="990">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ระยะเวลาเข้าถึง</label>
+            <select class="form-select">
+              <option>ตลอดชีพ</option>
+              <option>1 ปี</option>
+              <option>6 เดือน</option>
+              <option>3 เดือน</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Preview Revenue -->
+        <div class="card" style="padding:1.5rem;">
+          <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">📊 ประมาณรายได้</h2>
+          <div style="background:var(--color-gray-50);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.25rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+              <span style="font-size:0.875rem;color:var(--color-text-muted);">ราคาขาย</span>
+              <span style="font-weight:700;">฿990</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+              <span style="font-size:0.875rem;color:var(--color-text-muted);">ค่าธรรมเนียมแพลตฟอร์ม (30%)</span>
+              <span style="font-weight:700;color:var(--color-danger);">-฿297</span>
+            </div>
+            <div style="height:1px;background:var(--color-border);margin:0.75rem 0;"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span style="font-size:0.9375rem;font-weight:700;">รายได้ต่อการขาย</span>
+              <span style="font-size:1.125rem;font-weight:800;color:var(--color-success);">฿693</span>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg,#CA895F11,#CA895F22);border-radius:var(--radius-lg);padding:1rem;text-align:center;border:1.5px solid rgba(202,137,95,0.2);">
+            <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:0.375rem;">หากขายได้ 100 คน/เดือน</p>
+            <p style="font-size:1.5rem;font-weight:900;color:var(--color-primary);">฿69,300</p>
+            <p style="font-size:0.75rem;color:var(--color-text-muted);">ต่อเดือน</p>
+          </div>
+
+          <div class="card" style="padding:1rem;margin-top:1rem;background:#FFFBF5;">
+            <p style="font-size:0.8rem;font-weight:700;color:var(--color-text);margin-bottom:0.5rem;">🎯 นโยบายราคา</p>
+            <ul style="font-size:0.8rem;color:var(--color-text-muted);list-style:disc;padding-left:1.25rem;display:flex;flex-direction:column;gap:0.25rem;">
+              <li>ราคาขั้นต่ำ ฿199</li>
+              <li>ราคาสูงสุด ฿9,990</li>
+              <li>ส่วนลดสูงสุด 90%</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Curriculum -->
+    <div id="step4" class="create-course-step" style="display:none;">
+      <div class="card" style="padding:1.5rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+          <h2 style="font-size:1rem;font-weight:800;">📖 หลักสูตร</h2>
+          <button onclick="addSection()" class="btn btn-primary btn-sm">+ เพิ่ม Section</button>
+        </div>
+
+        <div id="curriculumBuilder">
+          <!-- Section 1 -->
+          <div class="curriculum-section" id="section-0">
+            <div class="curriculum-section-header">
+              <div style="display:flex;align-items:center;gap:0.625rem;flex:1;">
+                <span style="cursor:grab;color:var(--color-text-muted);">⠿</span>
+                <span style="font-weight:700;font-size:0.875rem;">Section 1:</span>
+                <input type="text" class="form-input" placeholder="ชื่อ Section" style="flex:1;padding:0.375rem 0.625rem;font-size:0.875rem;" value="บทนำ">
+              </div>
+              <button onclick="this.closest('.curriculum-section').remove()" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.125rem;">×</button>
+            </div>
+            <div class="curriculum-lessons" id="lessons-0">
+              <div class="curriculum-lesson">
+                <span style="cursor:grab;color:var(--color-text-muted);font-size:0.875rem;">⠿</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <input type="text" class="form-input" placeholder="ชื่อบทเรียน" style="flex:1;padding:0.375rem 0.625rem;font-size:0.875rem;" value="ยินดีต้อนรับ">
+                <select class="form-select" style="width:auto;font-size:0.8rem;padding:0.375rem 0.625rem;">
+                  <option>วิดีโอ</option><option>บทความ</option><option>Quiz</option>
+                </select>
+                <input type="text" class="form-input" placeholder="00:00" style="width:70px;padding:0.375rem 0.5rem;font-size:0.8rem;text-align:center;">
+                <button onclick="this.closest('.curriculum-lesson').remove()" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.125rem;">×</button>
+              </div>
+            </div>
+            <button onclick="addLesson(this)" class="btn btn-ghost btn-sm" style="margin:0.625rem 0 0 1.25rem;color:var(--color-primary);">+ เพิ่มบทเรียน</button>
+          </div>
+        </div>
+
+        <!-- Curriculum Summary -->
+        <div style="margin-top:1.5rem;padding:1rem;background:var(--color-gray-50);border-radius:var(--radius-lg);display:flex;gap:2rem;flex-wrap:wrap;">
+          <div style="text-align:center;"><div style="font-weight:800;font-size:1.25rem;" id="sectionCount">1</div><div style="font-size:0.75rem;color:var(--color-text-muted);">Sections</div></div>
+          <div style="text-align:center;"><div style="font-weight:800;font-size:1.25rem;" id="lessonCount">1</div><div style="font-size:0.75rem;color:var(--color-text-muted);">บทเรียน</div></div>
+          <div style="text-align:center;"><div style="font-weight:800;font-size:1.25rem;">0:00</div><div style="font-size:0.75rem;color:var(--color-text-muted);">ความยาวรวม</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Navigation Buttons -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--color-border);">
+      <button id="prevStepBtn" class="btn btn-outline" onclick="prevStep()" style="display:none;">← ขั้นตอนก่อน</button>
+      <div style="flex:1;"></div>
+      <button id="nextStepBtn" class="btn btn-primary" onclick="nextStep()">ถัดไป →</button>
+      <button id="submitCourseBtn" class="btn btn-primary" style="display:none;" onclick="submitCourse()">🚀 ส่งเพื่อรีวิว</button>
+    </div>
+  </main>
+</div>
+
+<style>
+.upload-zone{border:2px dashed var(--color-border);border-radius:var(--radius-xl);padding:2rem;text-align:center;transition:all 0.2s;background:var(--color-gray-50);}
+.upload-zone:hover{border-color:var(--color-primary);background:rgba(202,137,95,0.04);}
+.multistep-indicator{display:flex;align-items:center;margin-bottom:2rem;background:#fff;border-radius:var(--radius-xl);padding:1.25rem;border:1px solid var(--color-border);}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:0.5rem;min-width:80px;}
+.step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.875rem;border:2px solid var(--color-border);color:var(--color-text-muted);background:#fff;transition:all 0.2s;}
+.step-label{font-size:0.75rem;font-weight:600;color:var(--color-text-muted);text-align:center;transition:color 0.2s;}
+.step-item.active .step-circle{background:var(--color-primary);border-color:var(--color-primary);color:#fff;}
+.step-item.active .step-label{color:var(--color-primary);}
+.step-item.done .step-circle{background:var(--color-success);border-color:var(--color-success);color:#fff;}
+.step-item.done .step-label{color:var(--color-success);}
+.step-line{flex:1;height:2px;background:var(--color-border);transition:background 0.2s;}
+.step-line.done{background:var(--color-success);}
+.curriculum-section{background:var(--color-gray-50);border:1.5px solid var(--color-border);border-radius:var(--radius-lg);margin-bottom:1rem;overflow:hidden;}
+.curriculum-section-header{background:#fff;padding:0.75rem 1rem;display:flex;align-items:center;gap:0.75rem;border-bottom:1px solid var(--color-border);}
+.curriculum-lessons{padding:0.75rem 1rem;display:flex;flex-direction:column;gap:0.5rem;}
+.curriculum-lesson{display:flex;align-items:center;gap:0.625rem;background:#fff;border:1px solid var(--color-border-light);border-radius:var(--radius-md);padding:0.625rem;}
+.learn-item{display:flex;gap:0.5rem;}
+@media(max-width:900px){
+  #step1 > div,#step3 > div,#step2 > div{grid-template-columns:1fr!important;}
+}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initSidebar();
+
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  function updateSteps() {
+    document.querySelectorAll('.step-item').forEach((el, i) => {
+      const sn = i < 3 ? el : el;
+      const step = parseInt(el.dataset.step);
+      el.className = 'step-item' + (step === currentStep ? ' active' : step < currentStep ? ' done' : '');
+    });
+    document.querySelectorAll('.step-line').forEach((el, i) => {
+      el.className = 'step-line' + (i + 1 < currentStep ? ' done' : '');
+    });
+    for (let i = 1; i <= totalSteps; i++) {
+      document.getElementById('step' + i).style.display = i === currentStep ? '' : 'none';
+    }
+    document.getElementById('prevStepBtn').style.display = currentStep > 1 ? '' : 'none';
+    document.getElementById('nextStepBtn').style.display = currentStep < totalSteps ? '' : 'none';
+    document.getElementById('submitCourseBtn').style.display = currentStep === totalSteps ? '' : 'none';
+  }
+
+  function nextStep() {
+    if (currentStep < totalSteps) { currentStep++; updateSteps(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) { currentStep--; updateSteps(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  }
+
+  function submitCourse() {
+    showToast('ส่งคอร์สเพื่อรีวิวแล้ว! ✅ ทีมงานจะตรวจสอบภายใน 2-3 วัน', 'success', 4000);
+    setTimeout(() => window.location.href = 'instructor-dashboard.html', 2500);
+  }
+
+  function togglePricingType(type) {
+    document.getElementById('paidOption').style.borderColor = type === 'paid' ? 'var(--color-primary)' : 'var(--color-border)';
+    document.getElementById('paidOption').style.color = type === 'paid' ? 'var(--color-primary)' : '';
+    document.getElementById('freeOption').style.borderColor = type === 'free' ? 'var(--color-primary)' : 'var(--color-border)';
+    document.getElementById('pricingFields').style.display = type === 'paid' ? '' : 'none';
+  }
+
+  function addLearningItem() {
+    const list = document.getElementById('whatYouLearnList');
+    const div = document.createElement('div');
+    div.className = 'learn-item';
+    div.style.cssText = 'display:flex;gap:0.5rem;';
+    div.innerHTML = `<input type="text" class="form-input" placeholder="สิ่งที่จะได้เรียนรู้..." style="flex:1;"><button onclick="removeLearningItem(this)" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0 0.375rem;">×</button>`;
+    list.appendChild(div);
+  }
+
+  function removeLearningItem(btn) {
+    const items = document.querySelectorAll('#whatYouLearnList .learn-item');
+    if (items.length > 1) btn.closest('.learn-item').remove();
+  }
+
+  function addRequirement() {
+    const list = document.getElementById('requirementsList');
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;gap:0.5rem;';
+    div.innerHTML = `<input type="text" class="form-input" placeholder="เงื่อนไขเบื้องต้น..." style="flex:1;"><button onclick="this.closest('div').remove()" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0 0.375rem;">×</button>`;
+    list.appendChild(div);
+  }
+
+  let sectionCount = 1;
+
+  function addSection() {
+    const builder = document.getElementById('curriculumBuilder');
+    const idx = sectionCount++;
+    const div = document.createElement('div');
+    div.className = 'curriculum-section';
+    div.id = 'section-' + idx;
+    div.innerHTML = `
+      <div class="curriculum-section-header">
+        <div style="display:flex;align-items:center;gap:0.625rem;flex:1;">
+          <span style="cursor:grab;color:var(--color-text-muted);">⠿</span>
+          <span style="font-weight:700;font-size:0.875rem;">Section ${idx+1}:</span>
+          <input type="text" class="form-input" placeholder="ชื่อ Section" style="flex:1;padding:0.375rem 0.625rem;font-size:0.875rem;">
+        </div>
+        <button onclick="this.closest('.curriculum-section').remove();updateCurriculumCount();" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.125rem;">×</button>
+      </div>
+      <div class="curriculum-lessons" id="lessons-${idx}"></div>
+      <button onclick="addLesson(this)" class="btn btn-ghost btn-sm" style="margin:0.625rem 0 0 1.25rem;color:var(--color-primary);">+ เพิ่มบทเรียน</button>`;
+    builder.appendChild(div);
+    updateCurriculumCount();
+  }
+
+  function addLesson(btn) {
+    const section = btn.closest('.curriculum-section');
+    const lessonList = section.querySelector('.curriculum-lessons');
+    const div = document.createElement('div');
+    div.className = 'curriculum-lesson';
+    div.innerHTML = `
+      <span style="cursor:grab;color:var(--color-text-muted);font-size:0.875rem;">⠿</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <input type="text" class="form-input" placeholder="ชื่อบทเรียน" style="flex:1;padding:0.375rem 0.625rem;font-size:0.875rem;">
+      <select class="form-select" style="width:auto;font-size:0.8rem;padding:0.375rem 0.625rem;">
+        <option>วิดีโอ</option><option>บทความ</option><option>Quiz</option>
+      </select>
+      <input type="text" class="form-input" placeholder="00:00" style="width:70px;padding:0.375rem 0.5rem;font-size:0.8rem;text-align:center;">
+      <button onclick="this.closest('.curriculum-lesson').remove();updateCurriculumCount();" style="color:var(--color-danger);background:none;border:none;cursor:pointer;font-size:1.125rem;">×</button>`;
+    lessonList.appendChild(div);
+    updateCurriculumCount();
+  }
+
+  function updateCurriculumCount() {
+    document.getElementById('sectionCount').textContent = document.querySelectorAll('.curriculum-section').length;
+    document.getElementById('lessonCount').textContent = document.querySelectorAll('.curriculum-lesson').length;
+  }
+
+  function previewThumbnail(input) {
+    if (!input.files[0]) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const preview = document.getElementById('thumbnailPreview');
+      preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:160px;object-fit:cover;border-radius:var(--radius-lg);">`;
+      showToast('อัปโหลดภาพแล้ว 📸');
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+</script>
+</body>
+</html>

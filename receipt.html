@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ใบเสร็จรับเงิน | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-100);">
+
+<div id="nav-placeholder"></div>
+
+<!-- Actions Bar (no-print) -->
+<div class="no-print" style="background:#fff;border-bottom:1px solid var(--color-border);padding:0.875rem 0;">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;">
+    <div class="breadcrumb">
+      <div class="breadcrumb-item"><a href="student-dashboard.html">Dashboard</a></div>
+      <span class="breadcrumb-sep">›</span>
+      <div class="breadcrumb-item current">ใบเสร็จรับเงิน</div>
+    </div>
+    <div style="display:flex;gap:0.75rem;">
+      <button onclick="window.print()" class="btn btn-primary btn-sm">🖨 พิมพ์ / บันทึก PDF</button>
+      <button onclick="showToast('ส่งอีเมลแล้ว! 📧')" class="btn btn-outline btn-sm">📧 ส่งทางอีเมล</button>
+      <a href="student-dashboard.html" class="btn btn-ghost btn-sm">← กลับ</a>
+    </div>
+  </div>
+</div>
+
+<!-- Invoice Document -->
+<div class="container" style="padding-top:2.5rem;padding-bottom:4rem;max-width:800px;">
+  <div style="background:#fff;border-radius:var(--radius-2xl);box-shadow:var(--shadow-xl);overflow:hidden;" id="receiptDoc">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,var(--color-text) 0%,#2A2A3A 100%);padding:2.5rem;color:#fff;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1.5rem;">
+      <div>
+        <div style="font-size:1.5rem;font-weight:900;color:var(--color-primary);display:flex;align-items:center;gap:0.5rem;margin-bottom:0.375rem;">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M22 14l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LearnHub
+        </div>
+        <p style="color:#9CA3AF;font-size:0.8125rem;">แพลตฟอร์มเรียนออนไลน์</p>
+        <p style="color:#9CA3AF;font-size:0.8125rem;margin-top:0.25rem;">learn@learnhub.th | 02-xxx-xxxx</p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:2rem;font-weight:900;letter-spacing:0.05em;">ใบเสร็จรับเงิน</div>
+        <div style="font-size:0.9rem;color:#9CA3AF;margin-top:0.5rem;">INVOICE</div>
+        <div style="font-size:1.125rem;font-weight:700;color:var(--color-primary);margin-top:0.5rem;">#INV-2024-12847</div>
+      </div>
+    </div>
+
+    <!-- Bill To / Invoice Info -->
+    <div style="padding:2rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;border-bottom:1px solid var(--color-border);">
+      <div>
+        <h3 style="font-size:0.75rem;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.875rem;">เรียกเก็บจาก</h3>
+        <div style="font-size:0.9375rem;">
+          <div style="font-weight:700;margin-bottom:0.25rem;">สมศักดิ์ รักเรียน</div>
+          <div style="color:var(--color-text-muted);">somsak@example.com</div>
+        </div>
+      </div>
+      <div style="text-align:right;">
+        <h3 style="font-size:0.75rem;font-weight:700;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.875rem;">รายละเอียดใบเสร็จ</h3>
+        <div style="display:flex;flex-direction:column;gap:0.375rem;font-size:0.875rem;">
+          <div><span style="color:var(--color-text-muted);">วันที่ออก: </span><strong>25 ธ.ค. 2567</strong></div>
+          <div><span style="color:var(--color-text-muted);">วิธีชำระ: </span><strong>Visa •••• 4242</strong></div>
+          <div><span style="color:var(--color-text-muted);">สถานะ: </span><span class="badge badge-success">✅ ชำระแล้ว</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Items Table -->
+    <div style="padding:2rem 2.5rem;">
+      <table class="table" style="margin-bottom:0;">
+        <thead>
+          <tr>
+            <th style="background:var(--color-gray-50);">รายการ</th>
+            <th style="background:var(--color-gray-50);text-align:center;">จำนวน</th>
+            <th style="background:var(--color-gray-50);text-align:right;">ราคาต่อหน่วย</th>
+            <th style="background:var(--color-gray-50);text-align:right;">รวม</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div style="font-weight:600;">Complete Web Development Bootcamp 2024</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);margin-top:0.25rem;">ผู้สอน: Sarah Johnson • เข้าถึงตลอดชีพ</div>
+            </td>
+            <td style="text-align:center;">1</td>
+            <td style="text-align:right;">฿3,990</td>
+            <td style="text-align:right;font-weight:600;">฿3,990</td>
+          </tr>
+          <tr>
+            <td style="color:var(--color-success);">ส่วนลด (50% Off Sale)</td>
+            <td style="text-align:center;">—</td>
+            <td style="text-align:right;"></td>
+            <td style="text-align:right;color:var(--color-success);">-฿2,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Totals -->
+      <div style="display:flex;justify-content:flex-end;margin-top:1.5rem;">
+        <div style="width:280px;">
+          <div style="display:flex;justify-content:space-between;padding:0.5rem 0;font-size:0.9rem;">
+            <span style="color:var(--color-text-muted);">ยอดรวมก่อนภาษี</span>
+            <span>฿1,869</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:0.5rem 0;font-size:0.9rem;">
+            <span style="color:var(--color-text-muted);">VAT 7%</span>
+            <span>฿131</span>
+          </div>
+          <div style="border-top:2px solid var(--color-text);margin-top:0.5rem;padding-top:0.75rem;display:flex;justify-content:space-between;">
+            <strong style="font-size:1rem;">ยอดรวมทั้งหมด</strong>
+            <strong style="font-size:1.25rem;color:var(--color-primary);">฿1,990</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Notes -->
+    <div style="background:var(--color-gray-50);padding:1.75rem 2.5rem;border-top:1px solid var(--color-border);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;font-size:0.8125rem;color:var(--color-text-muted);">
+        <div>
+          <p style="font-weight:700;color:var(--color-text);margin-bottom:0.5rem;">ขอบคุณที่ใช้บริการ!</p>
+          <p style="line-height:1.6;">หากมีข้อสงสัยเกี่ยวกับใบเสร็จนี้ กรุณาติดต่อ support@learnhub.th ภายใน 30 วัน</p>
+        </div>
+        <div>
+          <p style="font-weight:700;color:var(--color-text);margin-bottom:0.5rem;">เงื่อนไขการคืนเงิน</p>
+          <p style="line-height:1.6;">ยินดีคืนเงินเต็มจำนวนภายใน 30 วันหากไม่พอใจ โดยไม่ต้องถามเหตุผล</p>
+        </div>
+      </div>
+      <div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--color-border);text-align:center;font-size:0.75rem;color:var(--color-text-muted);">
+        LearnHub Co., Ltd. | เลขทะเบียน: 0105565XXXXX | www.learnhub.th
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initPage({ type: 'public' });
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Player | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="player-page">
+
+<!-- Player Header -->
+<header class="player-header">
+  <div style="display:flex;align-items:center;gap:1rem;min-width:0;">
+    <a href="my-courses.html" style="color:#9CA3AF;display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;flex-shrink:0;transition:color 0.15s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='#9CA3AF'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      กลับ
+    </a>
+    <span style="color:#4B5563;font-size:0.75rem;">|</span>
+    <span class="player-header-title" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" id="playerCourseTitle">Complete Web Development Bootcamp 2024</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;flex-shrink:0;">
+    <!-- Progress -->
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <div class="player-progress-bar" style="width:120px;">
+        <div class="player-progress-fill" id="playerProgress" style="width:45%;"></div>
+      </div>
+      <span style="color:#9CA3AF;font-size:0.8125rem;" id="playerProgressPct">45%</span>
+    </div>
+    <button id="playerSidebarToggle" class="navbar-icon-btn" style="color:#9CA3AF;display:none;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Player Body -->
+<div class="player-body" style="height:calc(100vh - 60px);">
+
+  <!-- Main Video Area -->
+  <main class="player-main">
+    <!-- Video -->
+    <div class="player-video-wrap" id="videoArea">
+      <div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0A0A0A;position:relative;">
+        <!-- Fake video player -->
+        <div style="font-size:4rem;margin-bottom:1rem;">🎬</div>
+        <p class="video-title" style="color:#fff;font-size:1.0625rem;font-weight:600;text-align:center;padding:0 2rem;">React Hooks Deep Dive - useState & useEffect</p>
+        <p style="color:#6B7280;font-size:0.875rem;margin-top:0.5rem;">Section 5, Lesson 3</p>
+
+        <!-- Fake Controls -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:1.25rem;background:linear-gradient(transparent,rgba(0,0,0,0.8));">
+          <!-- Progress Bar -->
+          <input type="range" class="range-input" value="45" style="width:100%;margin-bottom:0.875rem;height:4px;">
+          <!-- Controls Row -->
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:1rem;">
+              <button style="color:#fff;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;" onclick="this.innerHTML=this.textContent==='⏸'?'▶ เล่น':'⏸'">▶ เล่น</button>
+              <span style="color:#D1D5DB;font-size:0.8125rem;">8:32 / 15:45</span>
+              <button style="color:#D1D5DB;background:none;border:none;cursor:pointer;font-size:0.8125rem;" onclick="showToast('ปิดเสียงแล้ว','info')">🔊</button>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.875rem;">
+              <select style="background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:0.8125rem;border-radius:4px;padding:0.25rem 0.5rem;cursor:pointer;">
+                <option>1x</option><option>1.25x</option><option selected>1.5x</option><option>2x</option>
+              </select>
+              <button style="color:#D1D5DB;background:none;border:none;cursor:pointer;font-size:0.8125rem;" onclick="showToast('เปิด Subtitles แล้ว')">CC</button>
+              <button style="color:#D1D5DB;background:none;border:none;cursor:pointer;font-size:0.8125rem;" onclick="showToast('Fullscreen')">⛶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Below Video: Tabs -->
+    <div style="padding:1.5rem;background:#1C1C1E;border-top:1px solid rgba(255,255,255,0.06);">
+      <!-- Action Row -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.75rem;">
+        <h2 style="color:#fff;font-size:1rem;font-weight:700;">React Hooks Deep Dive - useState & useEffect</h2>
+        <button id="markCompleteBtn" class="btn btn-primary btn-sm">✓ ทำเครื่องหมายว่าเสร็จ</button>
+      </div>
+
+      <!-- Tabs -->
+      <div data-tabs>
+        <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <button class="tab-btn active" style="color:#9CA3AF;border-bottom-color:var(--color-primary);padding-bottom:0.875rem;">ภาพรวม</button>
+          <button class="tab-btn" style="color:#9CA3AF;border-bottom-color:transparent;padding-bottom:0.875rem;">โน้ต</button>
+          <button class="tab-btn" style="color:#9CA3AF;border-bottom-color:transparent;padding-bottom:0.875rem;">Q&A</button>
+          <button class="tab-btn" style="color:#9CA3AF;border-bottom-color:transparent;padding-bottom:0.875rem;">ทรัพยากร</button>
+        </div>
+
+        <!-- Overview -->
+        <div class="tab-panel active" style="padding:1.25rem 0;">
+          <p style="color:#D1D5DB;font-size:0.9375rem;line-height:1.7;">ในบทเรียนนี้เราจะเรียนรู้ React Hooks ที่สำคัญ 2 ตัว ได้แก่ useState สำหรับจัดการ state และ useEffect สำหรับจัดการ side effects ในแอปพลิเคชัน React</p>
+          <div style="margin-top:1rem;display:flex;gap:1.5rem;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:0.5rem;color:#9CA3AF;font-size:0.875rem;"><span>⏱</span><span>15:45 นาที</span></div>
+            <div style="display:flex;align-items:center;gap:0.5rem;color:#9CA3AF;font-size:0.875rem;"><span>📝</span><span>มี Quiz ท้ายบท</span></div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="tab-panel" style="padding:1.25rem 0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+            <h3 style="color:#fff;font-weight:700;">บันทึกของฉัน</h3>
+            <button onclick="addNote()" class="btn btn-primary btn-sm">+ เพิ่มโน้ต</button>
+          </div>
+          <div id="notesList" style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="background:rgba(255,255,255,0.05);border-radius:var(--radius-lg);padding:1rem;border-left:3px solid var(--color-primary);">
+              <div style="display:flex;justify-content:space-between;margin-bottom:0.375rem;"><span style="font-size:0.75rem;color:var(--color-primary);">8:32</span><button style="color:#6B7280;background:none;border:none;cursor:pointer;font-size:0.75rem;">ลบ</button></div>
+              <p style="color:#D1D5DB;font-size:0.875rem;">useState ใช้สำหรับเก็บ state ใน functional component</p>
+            </div>
+          </div>
+          <div style="margin-top:1rem;">
+            <textarea id="newNote" class="form-textarea" placeholder="เขียนโน้ตของคุณ..." style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:#fff;min-height:80px;" rows="3"></textarea>
+            <button onclick="saveNote()" class="btn btn-outline btn-sm" style="margin-top:0.5rem;border-color:rgba(255,255,255,0.2);color:#D1D5DB;">บันทึกโน้ต</button>
+          </div>
+        </div>
+
+        <!-- Q&A -->
+        <div class="tab-panel" style="padding:1.25rem 0;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+            <h3 style="color:#fff;font-weight:700;">คำถาม-คำตอบ (23)</h3>
+            <button onclick="showToast('เปิดฟอร์มถามคำถาม')" class="btn btn-primary btn-sm">+ ถามคำถาม</button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-lg);padding:1rem;">
+              <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem;">
+                <img src="https://ui-avatars.com/api/?name=K+S&background=C3BEF7&color=595758&size=48" style="width:36px;height:36px;border-radius:50%;" alt="">
+                <div>
+                  <p style="color:#fff;font-size:0.8125rem;font-weight:600;">กมลชนก ส.</p>
+                  <p style="color:#6B7280;font-size:0.75rem;">3 วันที่แล้ว</p>
+                </div>
+              </div>
+              <p style="color:#D1D5DB;font-size:0.875rem;margin-bottom:0.75rem;">ถ้าใช้ useEffect กับ async function ต้องทำยังไงครับ?</p>
+              <div style="background:rgba(202,137,95,0.08);border-radius:var(--radius-md);padding:0.875rem;border-left:3px solid var(--color-primary);">
+                <p style="font-size:0.75rem;font-weight:700;color:var(--color-primary);margin-bottom:0.375rem;">Sarah Johnson (ผู้สอน)</p>
+                <p style="color:#D1D5DB;font-size:0.8125rem;">ต้องสร้าง async function ภายใน useEffect แล้ว call มันครับ เช่น: useEffect(() => { const fetchData = async () => { ... }; fetchData(); }, []);</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources -->
+        <div class="tab-panel" style="padding:1.25rem 0;">
+          <h3 style="color:#fff;font-weight:700;margin-bottom:1rem;">ทรัพยากรบทเรียน</h3>
+          <div style="display:flex;flex-direction:column;gap:0.75rem;">
+            <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-lg);padding:1rem;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <span style="font-size:1.5rem;">📄</span>
+                <div><p style="color:#fff;font-size:0.875rem;font-weight:600;">React Hooks Cheatsheet.pdf</p><p style="color:#6B7280;font-size:0.75rem;">2.3 MB</p></div>
+              </div>
+              <button onclick="showToast('กำลังดาวน์โหลด...')" class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,0.2);color:#D1D5DB;">⬇ ดาวน์โหลด</button>
+            </div>
+            <div style="background:rgba(255,255,255,0.04);border-radius:var(--radius-lg);padding:1rem;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:0.75rem;">
+                <span style="font-size:1.5rem;">💻</span>
+                <div><p style="color:#fff;font-size:0.875rem;font-weight:600;">Source Code - hooks-demo.zip</p><p style="color:#6B7280;font-size:0.75rem;">145 KB</p></div>
+              </div>
+              <button onclick="showToast('กำลังดาวน์โหลด...')" class="btn btn-outline btn-sm" style="border-color:rgba(255,255,255,0.2);color:#D1D5DB;">⬇ ดาวน์โหลด</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Course Sidebar -->
+  <aside class="player-sidebar" id="playerSidebar">
+    <div class="player-sidebar-header" style="display:flex;align-items:center;justify-content:space-between;">
+      <span>เนื้อหาคอร์ส</span>
+      <span style="color:#6B7280;font-size:0.75rem;" id="completedCount">45% เสร็จสิ้น</span>
+    </div>
+
+    <!-- Section List -->
+    <div id="playerLessonList">
+      <!-- Rendered by JS -->
+    </div>
+  </aside>
+</div>
+
+<style>
+@media(max-width:900px){
+  .player-sidebar{display:none;}
+  .player-sidebar.mobile-open{display:block;position:fixed;inset:60px 0 0;z-index:50;width:100%;max-width:380px;right:0;left:auto;}
+  #playerSidebarToggle{display:flex!important;}
+}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initTabs();
+
+  // Load course
+  const params = new URLSearchParams(window.location.search);
+  const course = getCourse(params.get('id')) || MOCK.courses[0];
+  document.getElementById('playerCourseTitle').textContent = course.title;
+
+  // Build lesson list from curriculum
+  const lessonList = document.getElementById('playerLessonList');
+  if (lessonList && course.curriculum) {
+    let html = '';
+    let lessonIdx = 0;
+    course.curriculum.forEach((sec, si) => {
+      html += `
+        <div style="padding:0.875rem 1.25rem 0.5rem;background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);">
+          <p style="font-size:0.75rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em;">Section ${si+1}</p>
+          <p style="font-size:0.875rem;font-weight:600;color:#E5E7EB;margin-top:0.25rem;">${sec.section}</p>
+          <p style="font-size:0.75rem;color:#6B7280;margin-top:0.25rem;">${sec.lessons.length} บทเรียน • ${sec.duration}</p>
+        </div>`;
+      sec.lessons.forEach((lesson, li) => {
+        const isCompleted = lessonIdx < 5;
+        const isActive = lessonIdx === 5;
+        html += `
+          <div class="player-lesson ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+            <div class="player-lesson-check">
+              ${isCompleted ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>' : ''}
+            </div>
+            <div>
+              <div class="player-lesson-title">${lesson}</div>
+              <div class="player-lesson-duration">8:30 นาที</div>
+            </div>
+          </div>`;
+        lessonIdx++;
+      });
+    });
+    lessonList.innerHTML = html;
+    initVideoPlayer();
+  }
+
+  function addNote() {
+    const ta = document.getElementById('newNote');
+    if (ta) ta.focus();
+  }
+
+  function saveNote() {
+    const ta = document.getElementById('newNote');
+    if (!ta || !ta.value.trim()) return;
+    const notesList = document.getElementById('notesList');
+    const note = document.createElement('div');
+    note.style.cssText = 'background:rgba(255,255,255,0.05);border-radius:var(--radius-lg);padding:1rem;border-left:3px solid var(--color-primary);';
+    note.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:0.375rem;"><span style="font-size:0.75rem;color:var(--color-primary);">ตอนนี้</span><button onclick="this.closest('div').parentElement.remove()" style="color:#6B7280;background:none;border:none;cursor:pointer;font-size:0.75rem;">ลบ</button></div><p style="color:#D1D5DB;font-size:0.875rem;">${ta.value}</p>`;
+    notesList.prepend(note);
+    ta.value = '';
+    showToast('บันทึกโน้ตแล้ว ✅');
+  }
+</script>
+</body>
+</html>

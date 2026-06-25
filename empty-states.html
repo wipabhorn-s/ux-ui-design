@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty States & Error Screens | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);">
+
+<!-- Minimal Nav -->
+<nav style="background:#fff;border-bottom:1px solid var(--color-border);padding:0 1.5rem;height:60px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="display:flex;align-items:center;gap:0.625rem;font-size:1.125rem;font-weight:900;color:var(--color-text);">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+    LearnHub
+  </a>
+  <a href="index.html" class="btn btn-outline btn-sm">← กลับหน้าแรก</a>
+</nav>
+
+<div class="container" style="padding-top:2rem;padding-bottom:4rem;">
+  <!-- Title -->
+  <div style="text-align:center;margin-bottom:3rem;">
+    <h1 style="font-size:2rem;font-weight:900;margin-bottom:0.5rem;">Empty States & Error Screens</h1>
+    <p style="color:var(--color-text-muted);">คอลเลกชัน empty state components สำหรับ LearnHub</p>
+  </div>
+
+  <!-- ── 1. No Search Results ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">1. ไม่พบผลการค้นหา</h2>
+    <div class="card" style="max-width:600px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:var(--color-gray-100);font-size:2.5rem;">🔍</div>
+        <h3 class="empty-state-title">ไม่พบผลการค้นหา</h3>
+        <p class="empty-state-text">ไม่พบคอร์สที่ตรงกับ "<strong>machine learning advanced</strong>"<br>ลองค้นหาด้วยคำอื่น หรือดูคอร์สแนะนำด้านล่าง</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+          <button onclick="showToast('ล้างตัวกรองแล้ว')" class="btn btn-primary">ล้างตัวกรอง</button>
+          <a href="courses.html" class="btn btn-outline">ดูทั้งหมด</a>
+        </div>
+        <!-- Suggestions -->
+        <div style="margin-top:1.5rem;text-align:left;width:100%;">
+          <p style="font-size:0.875rem;font-weight:700;color:var(--color-text-muted);margin-bottom:0.75rem;">คำค้นยอดนิยม:</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+            <button onclick="showToast('ค้นหา Python')" class="tag-btn">Python</button>
+            <button onclick="showToast('ค้นหา React')" class="tag-btn">React</button>
+            <button onclick="showToast('ค้นหา JavaScript')" class="tag-btn">JavaScript</button>
+            <button onclick="showToast('ค้นหา Flutter')" class="tag-btn">Flutter</button>
+            <button onclick="showToast('ค้นหา UI/UX')" class="tag-btn">UI/UX Design</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 2. 404 Not Found ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">2. 404 — ไม่พบหน้านี้</h2>
+    <div class="card" style="max-width:600px;margin:0 auto;">
+      <div class="empty-state">
+        <div style="font-size:5rem;line-height:1;margin-bottom:1rem;user-select:none;">😢</div>
+        <div style="font-size:5rem;font-weight:900;color:var(--color-primary);line-height:1;margin-bottom:0.75rem;letter-spacing:-0.05em;">404</div>
+        <h3 class="empty-state-title" style="margin-bottom:0.5rem;">ไม่พบหน้าที่คุณต้องการ</h3>
+        <p class="empty-state-text">หน้านี้อาจถูกย้าย ลบ หรือ URL ไม่ถูกต้อง<br>กลับไปหน้าแรกหรือค้นหาใหม่อีกครั้ง</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <a href="index.html" class="btn btn-primary">🏠 กลับหน้าแรก</a>
+          <a href="courses.html" class="btn btn-outline">ค้นหาคอร์ส</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3. Empty Cart ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">3. ตะกร้าว่างเปล่า</h2>
+    <div class="card" style="max-width:500px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:var(--color-accent-mint-bg);font-size:2.5rem;">🛒</div>
+        <h3 class="empty-state-title">ตะกร้าของคุณว่างเปล่า</h3>
+        <p class="empty-state-text">ยังไม่มีคอร์สในตะกร้า<br>ค้นหาคอร์สที่น่าสนใจแล้วเริ่มเรียนวันนี้!</p>
+        <a href="courses.html" class="btn btn-primary btn-lg">🔍 ค้นหาคอร์ส</a>
+        <!-- Recommended -->
+        <div style="margin-top:1.5rem;width:100%;text-align:left;">
+          <p style="font-size:0.875rem;font-weight:700;margin-bottom:0.75rem;">คอร์สแนะนำสำหรับคุณ:</p>
+          <div style="display:flex;flex-direction:column;gap:0.625rem;">
+            <div style="display:flex;gap:0.75rem;align-items:center;padding:0.625rem;border:1px solid var(--color-border-light);border-radius:var(--radius-md);">
+              <img src="https://picsum.photos/seed/react2024/64/48" style="width:56px;height:40px;border-radius:var(--radius-sm);object-fit:cover;">
+              <div style="flex:1;"><div style="font-size:0.8125rem;font-weight:700;" class="truncate-1">Complete React Developer</div><div style="font-size:0.75rem;color:var(--color-primary);font-weight:700;">฿990</div></div>
+              <button onclick="showToast('เพิ่มในตะกร้าแล้ว 🛒','success')" class="btn btn-primary btn-sm">เพิ่ม</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. No Notifications ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">4. ไม่มีการแจ้งเตือน</h2>
+    <div class="card" style="max-width:480px;margin:0 auto;">
+      <div class="empty-state" style="padding:2.5rem 1.5rem;">
+        <div class="empty-state-icon" style="background:rgba(195,190,247,0.15);font-size:2.5rem;">🔔</div>
+        <h3 class="empty-state-title">ยังไม่มีการแจ้งเตือน</h3>
+        <p class="empty-state-text">เมื่อมีการอัปเดตใหม่ เช่น คอร์สใหม่<br>หรือตอบคำถาม คุณจะเห็นที่นี่</p>
+        <button onclick="showToast('อัปเดตการแจ้งเตือน ✅')" class="btn btn-outline btn-sm">อัปเดต</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. No Courses (My Learning) ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">5. ยังไม่มีคอร์ส</h2>
+    <div class="card" style="max-width:560px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:rgba(214,246,221,0.4);font-size:2.5rem;">📚</div>
+        <h3 class="empty-state-title">เริ่มต้นการเรียนรู้ของคุณ</h3>
+        <p class="empty-state-text">คุณยังไม่ได้ลงทะเบียนคอร์สใด<br>ค้นหาคอร์สที่ตอบโจทย์และเริ่มเรียนได้เลย</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <a href="courses.html" class="btn btn-primary btn-lg">🎯 ค้นหาคอร์ส</a>
+          <a href="courses.html?free=true" class="btn btn-outline">ดูคอร์สฟรี</a>
+        </div>
+        <!-- Stats -->
+        <div style="display:flex;gap:2rem;margin-top:2rem;padding:1.25rem;background:var(--color-gray-50);border-radius:var(--radius-lg);width:100%;flex-wrap:wrap;justify-content:center;">
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:900;color:var(--color-primary);">5K+</div><div style="font-size:0.75rem;color:var(--color-text-muted);">คอร์สคุณภาพ</div></div>
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:900;color:var(--color-primary);">500K+</div><div style="font-size:0.75rem;color:var(--color-text-muted);">ผู้เรียน</div></div>
+          <div style="text-align:center;"><div style="font-size:1.5rem;font-weight:900;color:var(--color-primary);">4.8★</div><div style="font-size:0.75rem;color:var(--color-text-muted);">คะแนนเฉลี่ย</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 6. 500 Server Error ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">6. 500 — เกิดข้อผิดพลาด</h2>
+    <div class="card" style="max-width:580px;margin:0 auto;">
+      <div class="empty-state">
+        <div style="font-size:4rem;margin-bottom:0.5rem;animation:pulse 2s infinite;">⚠️</div>
+        <div style="font-size:4rem;font-weight:900;color:var(--color-danger);line-height:1;margin-bottom:0.75rem;letter-spacing:-0.05em;">500</div>
+        <h3 class="empty-state-title">เกิดข้อผิดพลาดของเซิร์ฟเวอร์</h3>
+        <p class="empty-state-text">เซิร์ฟเวอร์ไม่สามารถประมวลผลคำขอได้<br>กรุณาลองใหม่อีกครั้ง หรือติดต่อทีมสนับสนุน</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <button onclick="showToast('รีเฟรชหน้า...');setTimeout(()=>location.reload(),800)" class="btn btn-primary">🔄 ลองอีกครั้ง</button>
+          <button onclick="showToast('เปิดหน้า Support')" class="btn btn-outline">💬 ติดต่อ Support</button>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:var(--radius-lg);width:100%;text-align:left;">
+          <p style="font-size:0.8rem;font-weight:700;color:var(--color-danger);margin-bottom:0.25rem;">Error Details:</p>
+          <p style="font-size:0.8rem;font-family:monospace;color:var(--color-text-muted);">Error 500: Internal Server Error<br>Request ID: req_8x2k9p3m1a4</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 7. No Certificates ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">7. ยังไม่มีใบประกาศนียบัตร</h2>
+    <div class="card" style="max-width:520px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:rgba(195,190,247,0.15);font-size:2.5rem;">🏆</div>
+        <h3 class="empty-state-title">ยังไม่มีใบประกาศนียบัตร</h3>
+        <p class="empty-state-text">เรียนจบคอร์สและผ่านการทดสอบ<br>คุณจะได้รับ Certificate พิเศษจาก LearnHub</p>
+        <a href="my-courses.html" class="btn btn-primary">📚 ไปเรียนต่อ</a>
+        <!-- Steps -->
+        <div style="margin-top:1.75rem;width:100%;display:flex;flex-direction:column;gap:0.75rem;text-align:left;">
+          <div style="display:flex;gap:0.875rem;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--color-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.875rem;flex-shrink:0;">1</div>
+            <div><div style="font-weight:700;font-size:0.9375rem;">เรียนครบทุกบทเรียน</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ดูวิดีโอครบ 100%</div></div>
+          </div>
+          <div style="display:flex;gap:0.875rem;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent-purple);color:var(--color-text);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.875rem;flex-shrink:0;">2</div>
+            <div><div style="font-weight:700;font-size:0.9375rem;">ทำ Quiz และส่งงาน</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ผ่านเกณฑ์ 70%</div></div>
+          </div>
+          <div style="display:flex;gap:0.875rem;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--color-accent-mint);color:var(--color-text);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.875rem;flex-shrink:0;">3</div>
+            <div><div style="font-weight:700;font-size:0.9375rem;">รับ Certificate</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ดาวน์โหลดและแชร์</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. Network Error / Offline ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">8. ไม่มีการเชื่อมต่ออินเทอร์เน็ต</h2>
+    <div class="card" style="max-width:500px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:var(--color-gray-100);font-size:2.5rem;">📡</div>
+        <h3 class="empty-state-title">ไม่มีการเชื่อมต่อ</h3>
+        <p class="empty-state-text">ดูเหมือนคุณออฟไลน์อยู่<br>ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่</p>
+        <button onclick="showToast('กำลังเชื่อมต่อใหม่...');setTimeout(()=>showToast('เชื่อมต่อสำเร็จ ✅','success'),1500)" class="btn btn-primary">🔄 ลองใหม่</button>
+        <div style="display:flex;gap:1.5rem;margin-top:1.5rem;">
+          <div style="text-align:center;"><div style="font-size:1.25rem;margin-bottom:0.25rem;">📥</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ดาวน์โหลดคอร์ส<br>ไว้ดูออฟไลน์</div></div>
+          <div style="text-align:center;"><div style="font-size:1.25rem;margin-bottom:0.25rem;">📒</div><div style="font-size:0.8rem;color:var(--color-text-muted);">โน้ตของคุณ<br>พร้อมใช้งาน</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9. Empty Wishlist ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">9. รายการโปรดว่างเปล่า</h2>
+    <div class="card" style="max-width:480px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:rgba(239,68,68,0.08);font-size:2.5rem;">💔</div>
+        <h3 class="empty-state-title">ยังไม่มีรายการโปรด</h3>
+        <p class="empty-state-text">กด ♡ บนคอร์สที่สนใจเพื่อบันทึกไว้ดูทีหลัง</p>
+        <a href="courses.html" class="btn btn-primary">ค้นหาคอร์ส</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 10. Coming Soon ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">10. เร็วๆ นี้ (Coming Soon)</h2>
+    <div class="card" style="max-width:560px;margin:0 auto;">
+      <div class="empty-state">
+        <div style="font-size:3.5rem;margin-bottom:1rem;animation:bounce 2s infinite;">🚀</div>
+        <div style="display:inline-block;background:linear-gradient(135deg,var(--color-primary),#B5764E);color:#fff;font-size:0.75rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;padding:0.375rem 1rem;border-radius:99px;margin-bottom:1.25rem;">เร็วๆ นี้</div>
+        <h3 class="empty-state-title">ฟีเจอร์ใหม่กำลังมา!</h3>
+        <p class="empty-state-text">เรากำลังพัฒนาฟีเจอร์ Live Class สด<br>ที่ให้คุณเรียนกับผู้สอนแบบเรียลไทม์</p>
+        <!-- Email Notify -->
+        <div style="display:flex;gap:0.5rem;width:100%;max-width:380px;">
+          <input type="email" class="form-input" placeholder="กรอกอีเมลรับการแจ้งเตือน" style="flex:1;">
+          <button onclick="showToast('บันทึกอีเมลแล้ว! จะแจ้งเมื่อเปิดตัว 📧','success')" class="btn btn-primary">แจ้งฉัน</button>
+        </div>
+        <!-- Countdown -->
+        <div style="display:flex;gap:1.5rem;margin-top:1.75rem;flex-wrap:wrap;justify-content:center;">
+          <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:900;color:var(--color-primary);" id="days">14</div>
+            <div style="font-size:0.75rem;color:var(--color-text-muted);">วัน</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:900;color:var(--color-primary);" id="hrs">07</div>
+            <div style="font-size:0.75rem;color:var(--color-text-muted);">ชั่วโมง</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:900;color:var(--color-primary);" id="mins">43</div>
+            <div style="font-size:0.75rem;color:var(--color-text-muted);">นาที</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:900;color:var(--color-primary);" id="secs">29</div>
+            <div style="font-size:0.75rem;color:var(--color-text-muted);">วินาที</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 11. Access Denied / Unauthorized ── -->
+  <div style="margin-bottom:3rem;">
+    <h2 class="section-badge">11. ไม่มีสิทธิ์เข้าถึง</h2>
+    <div class="card" style="max-width:520px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:rgba(239,68,68,0.08);font-size:2.5rem;">🔐</div>
+        <h3 class="empty-state-title">ไม่มีสิทธิ์เข้าถึง</h3>
+        <p class="empty-state-text">คุณต้องลงทะเบียนคอร์สนี้ก่อนถึงจะเข้าได้<br>หรือบัญชีของคุณยังไม่ได้เข้าสู่ระบบ</p>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;">
+          <a href="login.html" class="btn btn-primary">🔑 เข้าสู่ระบบ</a>
+          <a href="course-detail.html" class="btn btn-outline">ซื้อคอร์สนี้</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 12. Empty Inbox / Messages ── -->
+  <div style="margin-bottom:2rem;">
+    <h2 class="section-badge">12. ไม่มีข้อความ</h2>
+    <div class="card" style="max-width:480px;margin:0 auto;">
+      <div class="empty-state">
+        <div class="empty-state-icon" style="background:rgba(195,190,247,0.15);font-size:2.5rem;">💬</div>
+        <h3 class="empty-state-title">ไม่มีข้อความ</h3>
+        <p class="empty-state-text">ยังไม่มีการสนทนาในกล่องข้อความ<br>ถามคำถามผู้สอนได้จากหน้าคอร์ส</p>
+        <a href="course-detail.html" class="btn btn-outline btn-sm">💬 ถามคำถาม</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.section-badge{font-size:0.8125rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-muted);margin-bottom:1rem;display:block;}
+.tag-btn{padding:0.375rem 0.875rem;border:1.5px solid var(--color-border);border-radius:99px;background:#fff;font-size:0.8125rem;font-weight:600;cursor:pointer;color:var(--color-text);transition:all 0.15s;}
+.tag-btn:hover{border-color:var(--color-primary);color:var(--color-primary);background:rgba(202,137,95,0.04);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Countdown timer
+  function updateCountdown() {
+    const target = new Date();
+    target.setDate(target.getDate() + 14);
+    const now = new Date();
+    const diff = target - now;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const pad = n => String(n).padStart(2, '0');
+    document.getElementById('days').textContent = pad(d);
+    document.getElementById('hrs').textContent = pad(h);
+    document.getElementById('mins').textContent = pad(m);
+    document.getElementById('secs').textContent = pad(s);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>

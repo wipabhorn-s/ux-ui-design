@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>คอร์สทั้งหมด | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758','periwinkle':'#C3BEF7','mint':'#D6F6DD','paleoak':'#EBD2B4'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- Page Header -->
+<div style="background:linear-gradient(135deg,var(--color-surface-warm-bg) 0%,var(--color-accent-purple-bg) 100%);padding:2.5rem 0 1.5rem;border-bottom:1px solid var(--color-border);">
+  <div class="container">
+    <div class="breadcrumb" style="margin-bottom:0.875rem;">
+      <div class="breadcrumb-item"><a href="index.html">หน้าหลัก</a></div>
+      <span class="breadcrumb-sep">›</span>
+      <div class="breadcrumb-item current">คอร์สทั้งหมด</div>
+    </div>
+    <h1 style="font-size:1.875rem;font-weight:800;color:var(--color-text);margin-bottom:0.5rem;">คอร์สทั้งหมด</h1>
+    <p style="color:var(--color-text-muted);font-size:0.9375rem;" id="resultCount">พบ 12 คอร์ส</p>
+  </div>
+</div>
+
+<!-- Content -->
+<div class="container" style="padding-top:2rem;padding-bottom:4rem;">
+  <div style="display:flex;gap:2rem;align-items:flex-start;">
+
+    <!-- ── FILTER SIDEBAR ── -->
+    <aside class="filter-sidebar" id="filterSidebar" style="flex-shrink:0;">
+
+      <!-- Mobile Filter Toggle -->
+      <div class="hide-desktop" style="margin-bottom:1rem;">
+        <button class="btn btn-outline btn-block" onclick="toggleFilterSidebar()">⚙ Filter & จัดเรียง</button>
+      </div>
+
+      <div id="filterContent" class="card" style="padding:1.5rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+          <h3 style="font-size:1rem;font-weight:700;">Filter</h3>
+          <button onclick="clearFilters()" style="font-size:0.8rem;color:var(--color-primary);font-weight:600;background:none;border:none;cursor:pointer;">ล้างทั้งหมด</button>
+        </div>
+
+        <!-- Category -->
+        <div class="filter-section">
+          <div class="filter-section-title">หมวดหมู่</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="Web Development"><span class="checkbox-label">Web Development <span class="filter-count">(4)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="Data Science"><span class="checkbox-label">Data Science <span class="filter-count">(2)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="UI/UX Design"><span class="checkbox-label">UI/UX Design <span class="filter-count">(1)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="Mobile Apps"><span class="checkbox-label">Mobile Apps <span class="filter-count">(2)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="Digital Marketing"><span class="checkbox-label">Digital Marketing <span class="filter-count">(1)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="category" value="Business"><span class="checkbox-label">Business <span class="filter-count">(2)</span></span></label>
+          </div>
+        </div>
+
+        <!-- Level -->
+        <div class="filter-section">
+          <div class="filter-section-title">ระดับ</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="level" value="Beginner"><span class="checkbox-label">ผู้เริ่มต้น <span class="filter-count">(7)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="level" value="Intermediate"><span class="checkbox-label">ปานกลาง <span class="filter-count">(5)</span></span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="level" value="Advanced"><span class="checkbox-label">ขั้นสูง <span class="filter-count">(0)</span></span></label>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="filter-section">
+          <div class="filter-section-title">ราคา</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="price" value="free"><span class="checkbox-label">ฟรี</span></label>
+            <label class="checkbox-group"><input type="checkbox" class="filter-check" name="price" value="paid"><span class="checkbox-label">มีค่าใช้จ่าย</span></label>
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="filter-section">
+          <div class="filter-section-title">คะแนนขึ้นไป</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="radio" name="rating" value="4.5"><span class="checkbox-label">⭐ 4.5 ขึ้นไป</span></label>
+            <label class="checkbox-group"><input type="radio" name="rating" value="4.0"><span class="checkbox-label">⭐ 4.0 ขึ้นไป</span></label>
+            <label class="checkbox-group"><input type="radio" name="rating" value="3.5"><span class="checkbox-label">⭐ 3.5 ขึ้นไป</span></label>
+          </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="filter-section">
+          <div class="filter-section-title">ระยะเวลาเรียน</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="checkbox" name="duration" value="short"><span class="checkbox-label">น้อยกว่า 10 ชั่วโมง</span></label>
+            <label class="checkbox-group"><input type="checkbox" name="duration" value="medium"><span class="checkbox-label">10-30 ชั่วโมง</span></label>
+            <label class="checkbox-group"><input type="checkbox" name="duration" value="long"><span class="checkbox-label">มากกว่า 30 ชั่วโมง</span></label>
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="filter-section">
+          <div class="filter-section-title">ภาษา</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <label class="checkbox-group"><input type="checkbox" name="lang" value="thai"><span class="checkbox-label">ภาษาไทย</span></label>
+            <label class="checkbox-group"><input type="checkbox" name="lang" value="english"><span class="checkbox-label">ภาษาอังกฤษ</span></label>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ── COURSE GRID ── -->
+    <div style="flex:1;min-width:0;">
+      <!-- Top Bar -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+        <!-- Search -->
+        <div class="form-input-icon" style="flex:1;max-width:320px;">
+          <span class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </span>
+          <input type="text" class="form-input" id="courseSearch" placeholder="ค้นหาคอร์ส...">
+        </div>
+        <!-- Sort -->
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <span style="font-size:0.875rem;color:var(--color-text-muted);white-space:nowrap;">จัดเรียงตาม:</span>
+          <select class="form-select" id="courseSort" style="width:auto;min-width:180px;">
+            <option value="popular">ยอดนิยมสูงสุด</option>
+            <option value="newest">ใหม่ล่าสุด</option>
+            <option value="rating">คะแนนสูงสุด</option>
+            <option value="price-low">ราคา: ต่ำ→สูง</option>
+            <option value="price-high">ราคา: สูง→ต่ำ</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active Filters Tags -->
+      <div id="activeFilters" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;"></div>
+
+      <!-- Grid -->
+      <div class="grid-auto" id="courseGrid"></div>
+
+      <!-- Pagination -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:3rem;" id="pagination">
+        <button class="btn btn-ghost btn-sm" disabled>‹ ก่อนหน้า</button>
+        <button class="btn btn-primary btn-sm">1</button>
+        <button class="btn btn-ghost btn-sm">2</button>
+        <button class="btn btn-ghost btn-sm">3</button>
+        <span style="color:var(--color-text-muted);">...</span>
+        <button class="btn btn-ghost btn-sm">8</button>
+        <button class="btn btn-ghost btn-sm">ถัดไป ›</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<style>
+.hide-desktop { display:none; }
+@media(max-width:768px){
+  .hide-desktop{display:block;}
+  #filterContent{display:none;}
+  #filterContent.show{display:block;}
+  .filter-sidebar{width:100%;}
+  [style*="display:flex;gap:2rem"]{flex-direction:column;}
+}
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initPage({ type: 'public', page: 'courses' });
+
+  // Initial render
+  document.getElementById('courseGrid').innerHTML = MOCK.courses.map(c => renderCourseCard(c)).join('');
+
+  // Check URL params for pre-search
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  if (q) {
+    const searchEl = document.getElementById('courseSearch');
+    if (searchEl) searchEl.value = q;
+    setTimeout(() => searchEl.dispatchEvent(new Event('input')), 100);
+  }
+
+  function toggleFilterSidebar() {
+    const fc = document.getElementById('filterContent');
+    fc.classList.toggle('show');
+  }
+</script>
+</body>
+</html>

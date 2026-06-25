@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | LearnHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="background:var(--color-gray-50);">
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="dashSidebar">
+  <div class="sidebar-logo">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M22 14l4 4-4 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    LearnHub
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-title">เมนูหลัก</div>
+    <a href="student-dashboard.html" class="sidebar-link active">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+    <a href="my-courses.html" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      คอร์สของฉัน
+      <span class="sidebar-badge">12</span>
+    </a>
+    <a href="certificate.html" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      ใบประกาศนียบัตร
+      <span class="sidebar-badge">5</span>
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Wishlist
+    </a>
+
+    <div class="sidebar-section-title" style="margin-top:0.5rem;">การเรียนรู้</div>
+    <a href="#" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      ความก้าวหน้า
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Q&A ของฉัน
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      ตารางเรียน
+    </a>
+
+    <div class="sidebar-section-title" style="margin-top:0.5rem;">บัญชี</div>
+    <a href="profile.html" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      ตั้งค่าบัญชี
+    </a>
+    <a href="instructor-dashboard.html" class="sidebar-link">
+      <svg class="sidebar-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      เปลี่ยนเป็นผู้สอน
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar"><img src="https://ui-avatars.com/api/?name=Somsak+R&background=CA895F&color=fff&size=72" alt="Avatar"></div>
+      <div>
+        <div class="sidebar-user-name">สมศักดิ์ รักเรียน</div>
+        <div class="sidebar-user-role">ผู้เรียน</div>
+      </div>
+    </div>
+    <a href="login.html" style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem 0.875rem;font-size:0.8125rem;color:var(--color-text-muted);border-radius:var(--radius-md);transition:all 0.15s;margin-top:0.25rem;" onmouseover="this.style.background='var(--color-gray-50)'" onmouseout="this.style.background=''">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      ออกจากระบบ
+    </a>
+  </div>
+</aside>
+
+<!-- DASHBOARD LAYOUT -->
+<div class="dashboard-layout">
+
+  <!-- Top Bar -->
+  <header class="dash-header">
+    <div class="dash-header-left">
+      <button class="navbar-icon-btn dash-mobile-toggle" id="sidebarToggle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="dash-breadcrumb">
+        <a href="index.html">LearnHub</a>
+        <span>›</span>
+        <span>Dashboard</span>
+      </div>
+    </div>
+    <div class="dash-header-right">
+      <div style="font-size:0.8125rem;color:var(--color-text-muted);">สวัสดี, <strong style="color:var(--color-text);">สมศักดิ์!</strong></div>
+      <button class="navbar-icon-btn" style="position:relative;" onclick="showToast('ไม่มีการแจ้งเตือนใหม่','info')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="nav-badge"></span>
+      </button>
+      <a href="profile.html">
+        <img src="https://ui-avatars.com/api/?name=Somsak+R&background=CA895F&color=fff&size=72" style="width:36px;height:36px;border-radius:50%;border:2px solid var(--color-border);cursor:pointer;" alt="Avatar">
+      </a>
+    </div>
+  </header>
+
+  <!-- Dashboard Content -->
+  <main class="dash-content">
+
+    <!-- Welcome Banner -->
+    <div style="background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-hover) 100%);border-radius:var(--radius-2xl);padding:2rem;color:#fff;margin-bottom:1.75rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:5rem;opacity:0.15;">📚</div>
+      <h1 style="font-size:1.375rem;font-weight:800;margin-bottom:0.375rem;">สวัสดีตอนเช้า สมศักดิ์! 👋</h1>
+      <p style="opacity:0.85;font-size:0.9375rem;margin-bottom:1.25rem;">วันนี้เรียนต่อจากที่ค้างไว้กันเลย ความก้าวหน้าของคุณน่าทึ่งมาก!</p>
+      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+        <div><div style="font-size:1.5rem;font-weight:900;">68%</div><div style="font-size:0.8rem;opacity:0.7;">Complete Web Dev</div></div>
+        <div><div style="font-size:1.5rem;font-weight:900;">7 🔥</div><div style="font-size:0.8rem;opacity:0.7;">วันติดต่อกัน</div></div>
+        <div><div style="font-size:1.5rem;font-weight:900;">248h</div><div style="font-size:0.8rem;opacity:0.7;">เรียนไปแล้ว</div></div>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid" style="margin-bottom:2rem;" id="statsGrid"></div>
+
+    <!-- Continue Learning -->
+    <div style="margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+        <h2 style="font-size:1.125rem;font-weight:800;">▶ เรียนต่อจากที่ค้างไว้</h2>
+        <a href="my-courses.html" style="font-size:0.875rem;color:var(--color-primary);font-weight:600;">ดูทั้งหมด →</a>
+      </div>
+      <div class="grid-3" id="continueLearning"></div>
+    </div>
+
+    <!-- Bottom Grid: Activity + Recommended -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:flex-start;" id="bottomGrid">
+      <!-- Recent Activity -->
+      <div class="card" style="padding:1.5rem;">
+        <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">📋 กิจกรรมล่าสุด</h2>
+        <div style="display:flex;flex-direction:column;gap:0;" id="activityFeed"></div>
+      </div>
+
+      <!-- Recommended -->
+      <div class="card" style="padding:1.5rem;">
+        <h2 style="font-size:1rem;font-weight:800;margin-bottom:1.25rem;">💡 แนะนำสำหรับคุณ</h2>
+        <div style="display:flex;flex-direction:column;gap:0.875rem;" id="recommendedCourses"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  initSidebar();
+
+  const d = MOCK.studentDashboard;
+
+  // Stats
+  const statsGrid = document.getElementById('statsGrid');
+  if (statsGrid) {
+    statsGrid.innerHTML = d.stats.map(s => `
+      <div class="stat-card">
+        <div class="stat-card-icon" style="background:${s.bg};color:${s.color};">
+          <span style="font-size:1.5rem;">${s.icon}</span>
+        </div>
+        <div class="stat-card-value">${s.value}</div>
+        <div class="stat-card-label">${s.label}</div>
+        <div class="stat-card-change ${s.trend}">
+          ${s.trend === 'up' ? '↑' : '↓'} ${s.change} เดือนที่แล้ว
+        </div>
+      </div>`).join('');
+  }
+
+  // Continue Learning
+  const cl = document.getElementById('continueLearning');
+  if (cl) {
+    cl.innerHTML = d.inProgressCourses.map(c => `
+      <div class="card" style="padding:1.25rem;cursor:pointer;" onclick="window.location.href='course-player.html?id=${c.id}'">
+        <div style="aspect-ratio:16/9;background:#111;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:0.875rem;">
+          <img src="${c.thumbnail}" alt="${c.title}" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <h3 style="font-size:0.875rem;font-weight:700;line-height:1.4;margin-bottom:0.375rem;" class="truncate-2">${c.title}</h3>
+        <p style="font-size:0.8rem;color:var(--color-text-muted);margin-bottom:0.75rem;">${c.instructor}</p>
+        <div style="margin-bottom:0.5rem;">
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.375rem;">
+            <span style="color:var(--color-text-muted);">ความก้าวหน้า</span>
+            <span style="font-weight:700;color:var(--color-primary);">${c.progress}%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${c.progress}%;"></div></div>
+        </div>
+        <div style="font-size:0.75rem;color:var(--color-text-muted);margin-bottom:0.875rem;">${c.timeLeft}</div>
+        <a href="course-player.html" class="btn btn-primary btn-sm btn-block">▶ เรียนต่อ</a>
+      </div>`).join('');
+  }
+
+  // Activity Feed
+  const feed = document.getElementById('activityFeed');
+  if (feed) {
+    feed.innerHTML = d.recentActivity.map((a, i) => `
+      <div style="display:flex;gap:0.875rem;padding:0.875rem 0;${i < d.recentActivity.length-1 ? 'border-bottom:1px solid var(--color-border-light);' : ''}">
+        <div style="width:36px;height:36px;background:var(--color-primary-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">${a.icon}</div>
+        <div>
+          <p style="font-size:0.875rem;font-weight:600;color:var(--color-text);margin-bottom:0.2rem;">${a.text}</p>
+          <p style="font-size:0.75rem;color:var(--color-text-muted);">${a.time}</p>
+        </div>
+      </div>`).join('');
+  }
+
+  // Recommended Courses
+  const rec = document.getElementById('recommendedCourses');
+  if (rec) {
+    rec.innerHTML = MOCK.courses.slice(3, 6).map(c => `
+      <div style="display:flex;gap:0.875rem;cursor:pointer;" onclick="window.location.href='course-detail.html?id=${c.id}'">
+        <img src="${c.thumbnail}" alt="" style="width:72px;height:48px;border-radius:var(--radius-md);object-fit:cover;flex-shrink:0;">
+        <div style="min-width:0;">
+          <h4 style="font-size:0.8125rem;font-weight:700;line-height:1.4;color:var(--color-text);" class="truncate-2">${c.title}</h4>
+          <p style="font-size:0.75rem;color:var(--color-text-muted);margin-top:0.125rem;">${formatPrice(c.price)}</p>
+        </div>
+      </div>`).join('');
+  }
+
+  // Responsive
+  function checkBottomGrid() {
+    const bg = document.getElementById('bottomGrid');
+    if (bg) bg.style.gridTemplateColumns = window.innerWidth < 900 ? '1fr' : '1fr 1fr';
+  }
+  checkBottomGrid();
+  window.addEventListener('resize', checkBottomGrid);
+</script>
+</body>
+</html>
