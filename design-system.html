@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learnora Design System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{'brand':'#CA895F','charcoal':'#595758'},fontFamily:{sans:['Inter','system-ui','sans-serif']}}}}</script>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── DS PAGE LAYOUT ── */
+    .ds-layout { display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    .ds-sidenav {
+      width: 220px; position: fixed; top: var(--navbar-height); bottom: 0;
+      overflow-y: auto; background: #fff; border-right: 1px solid var(--color-border);
+      padding: 1.5rem 0; z-index: 10;
+    }
+    .ds-sidenav-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); padding: 0.5rem 1.25rem; margin-top: 0.75rem; }
+    .ds-sidenav a { display: block; padding: 0.4rem 1.25rem; font-size: 0.8125rem; color: var(--color-text-secondary); transition: color 0.15s, background 0.15s; border-left: 2px solid transparent; }
+    .ds-sidenav a:hover { color: var(--color-primary); background: var(--color-primary-bg); }
+    .ds-sidenav a.active { color: var(--color-primary); font-weight: 600; border-left-color: var(--color-primary); background: var(--color-primary-bg); }
+    .ds-content { margin-left: 220px; padding: 2.5rem 3rem 5rem; max-width: 1100px; }
+    .ds-section { padding-top: 3rem; margin-top: 1rem; border-top: 1px solid var(--color-border); }
+    .ds-section:first-of-type { border-top: none; padding-top: 0; }
+    .ds-section-title { font-size: 1.375rem; font-weight: 800; color: var(--color-text); margin-bottom: 0.375rem; display: flex; align-items: center; gap: 0.625rem; }
+    .ds-section-desc { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 2rem; line-height: 1.6; }
+    .ds-subsection { margin-bottom: 2rem; }
+    .ds-subsection-title { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-text-muted); margin-bottom: 1rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem; }
+    .ds-preview { background: var(--color-gray-50); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 2rem; margin-bottom: 0.5rem; }
+    .ds-preview.dark { background: #1A1A2E; }
+    .ds-preview.warm { background: var(--color-surface-warm-bg); }
+    .ds-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+    .ds-col { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    /* Color swatches */
+    .color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .color-swatch { border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+    .color-swatch-block { height: 96px; }
+    .color-swatch-info { padding: 0.875rem; background: #fff; }
+    .color-swatch-name { font-size: 0.8125rem; font-weight: 700; color: var(--color-text); }
+    .color-swatch-hex { font-size: 0.75rem; font-family: monospace; color: var(--color-text-muted); margin-top: 0.125rem; }
+    .color-swatch-use { font-size: 0.7rem; color: var(--color-text-muted); margin-top: 0.375rem; line-height: 1.4; }
+
+    /* Typography specimen */
+    .type-row { display: flex; align-items: baseline; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--color-border-light); }
+    .type-row:last-child { border-bottom: none; }
+    .type-label { font-size: 0.75rem; font-weight: 600; color: var(--color-text-muted); min-width: 110px; flex-shrink: 0; font-family: monospace; }
+    .type-sample { flex: 1; }
+    .type-meta { font-size: 0.7rem; color: var(--color-text-muted); min-width: 140px; text-align: right; line-height: 1.5; flex-shrink: 0; }
+
+    /* Spacing strip */
+    .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.875rem; }
+    .token-item { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 0.875rem 1rem; }
+    .token-name { font-size: 0.75rem; font-family: monospace; color: var(--color-primary); margin-bottom: 0.25rem; }
+    .token-value { font-size: 0.8125rem; color: var(--color-text); font-weight: 600; }
+
+    /* State label chips */
+    .state-chip { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.625rem; border-radius: 99px; background: var(--color-gray-100); color: var(--color-gray-600); }
+
+    /* Error state card */
+    .error-card { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem; }
+    .error-icon { font-size: 2.5rem; }
+    .error-title { font-size: 0.9375rem; font-weight: 700; color: var(--color-text); }
+    .error-desc { font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.5; }
+
+    /* Nav showcase */
+    .ds-nav-demo { background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-xl); overflow: hidden; }
+
+    /* Code label */
+    .ds-tag { display: inline-block; font-size: 0.7rem; font-family: monospace; background: var(--color-gray-100); color: var(--color-primary); padding: 0.15rem 0.5rem; border-radius: var(--radius-sm); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .ds-sidenav { display: none; }
+      .ds-content { margin-left: 0; padding: 1.5rem 1.25rem 4rem; }
+      .ds-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .ds-content { padding: 1rem 1rem 4rem; }
+      .color-grid { grid-template-columns: 1fr 1fr; }
+      .ds-preview { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Shared Navbar placeholder -->
+<div id="navbar-placeholder"></div>
+
+<div class="ds-layout">
+  <!-- Side Navigation -->
+  <nav class="ds-sidenav" id="dsSidenav">
+    <div style="padding:0 1.25rem;margin-bottom:0.5rem;">
+      <div style="font-size:0.75rem;font-weight:800;color:var(--color-primary);letter-spacing:0.05em;">LEARNORA</div>
+      <div style="font-size:0.625rem;color:var(--color-text-muted);letter-spacing:0.08em;text-transform:uppercase;">Design System v1.0</div>
+    </div>
+    <div class="ds-sidenav-title">Foundation</div>
+    <a href="#colors">🎨 Color Palette</a>
+    <a href="#typography">✏️ Typography</a>
+    <a href="#tokens">🔧 Design Tokens</a>
+    <div class="ds-sidenav-title">Components</div>
+    <a href="#buttons">🔘 Buttons</a>
+    <a href="#forms">📋 Forms</a>
+    <a href="#cards">🃏 Cards</a>
+    <a href="#badges">🏷️ Badges</a>
+    <a href="#alerts">🔔 Alerts</a>
+    <div class="ds-sidenav-title">Patterns</div>
+    <a href="#error-states">⚠️ Error States</a>
+    <a href="#navigation">🧭 Navigation</a>
+    <a href="#tables">📊 Tables</a>
+    <a href="#modal">💬 Modal</a>
+    <a href="#interactive">⚡ Interactive</a>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="ds-content">
+
+    <!-- ══ INTRO ══ -->
+    <div style="margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;gap:0.875rem;margin-bottom:1rem;">
+        <div style="width:48px;height:48px;border-radius:var(--radius-xl);background:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none"><path d="M8 10h12M8 14h10M8 18h8M8 22h6" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.08em;">Design System</div>
+          <h1 style="font-size:2rem;font-weight:900;color:var(--color-text);line-height:1.1;">Learnora Design System</h1>
+        </div>
+      </div>
+      <p style="font-size:1rem;color:var(--color-text-secondary);line-height:1.7;max-width:620px;">Design System for <strong>Learnora Online Learning Platform</strong>. A living reference of colors, typography, components, and interaction patterns that keeps the UI consistent, accessible, and on-brand.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.625rem;margin-top:1.25rem;">
+        <span style="font-size:0.8rem;font-weight:600;padding:0.375rem 0.875rem;border-radius:99px;background:rgba(202,137,95,0.1);color:var(--color-primary);">Clean</span>
+        <span style="font-size:0.8rem;font-weight:600;padding:0.375rem 0.875rem;border-radius:99px;background:rgba(195,190,247,0.2);color:#5B21B6;">Modern</span>
+        <span style="font-size:0.8rem;font-weight:600;padding:0.375rem 0.875rem;border-radius:99px;background:rgba(214,246,221,0.5);color:#166534;">Friendly</span>
+        <span style="font-size:0.8rem;font-weight:600;padding:0.375rem 0.875rem;border-radius:99px;background:var(--color-gray-100);color:var(--color-gray-600);">Professional</span>
+        <span style="font-size:0.8rem;font-weight:600;padding:0.375rem 0.875rem;border-radius:99px;background:var(--color-surface-warm-bg);color:#92400E;">Trustworthy</span>
+      </div>
+    </div>
+
+    <!-- ══ 1. COLOR PALETTE ══ -->
+    <section class="ds-section" id="colors">
+      <h2 class="ds-section-title">🎨 Color Palette</h2>
+      <p class="ds-section-desc">The five brand colors and their full token system. Primary is Toasted Almond — used for all interactive elements.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Brand Colors</div>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch-block" style="background:#CA895F;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Toasted Almond</div>
+              <div class="color-swatch-hex">#CA895F · var(--color-primary)</div>
+              <div class="color-swatch-use">CTA buttons, links, highlights, focus rings</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-block" style="background:#595758;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Charcoal</div>
+              <div class="color-swatch-hex">#595758 · var(--color-text)</div>
+              <div class="color-swatch-use">Body text, headings, icons</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-block" style="background:#C3BEF7;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Periwinkle</div>
+              <div class="color-swatch-hex">#C3BEF7 · var(--color-accent-purple)</div>
+              <div class="color-swatch-use">Accent tags, badges, decorative elements</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-block" style="background:#D6F6DD;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Frosted Mint</div>
+              <div class="color-swatch-hex">#D6F6DD · var(--color-accent-mint)</div>
+              <div class="color-swatch-use">Success states, new badges, tips</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch-block" style="background:#EBD2B4;"></div>
+            <div class="color-swatch-info">
+              <div class="color-swatch-name">Pale Oak</div>
+              <div class="color-swatch-hex">#EBD2B4 · var(--color-surface-warm)</div>
+              <div class="color-swatch-use">Surface backgrounds, secondary buttons</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Primary Scale</div>
+        <div style="display:flex;border-radius:var(--radius-xl);overflow:hidden;border:1px solid var(--color-border);">
+          <div style="flex:1;background:#FBF3EC;padding:1rem;text-align:center;"><div style="font-size:0.7rem;font-weight:700;color:#CA895F;">50</div><div style="font-size:0.65rem;color:var(--color-text-muted);">#FBF3EC</div></div>
+          <div style="flex:1;background:#E5B08A;padding:1rem;text-align:center;"><div style="font-size:0.7rem;font-weight:700;color:#7A3F1A;">200</div><div style="font-size:0.65rem;color:#7A3F1A;">#E5B08A</div></div>
+          <div style="flex:1;background:#CA895F;padding:1rem;text-align:center;"><div style="font-size:0.7rem;font-weight:700;color:#fff;">400 ★</div><div style="font-size:0.65rem;color:#fff;">#CA895F</div></div>
+          <div style="flex:1;background:#B5764E;padding:1rem;text-align:center;"><div style="font-size:0.7rem;font-weight:700;color:#fff;">500</div><div style="font-size:0.65rem;color:#fff;">#B5764E</div></div>
+          <div style="flex:1;background:#9E6440;padding:1rem;text-align:center;"><div style="font-size:0.7rem;font-weight:700;color:#fff;">600</div><div style="font-size:0.65rem;color:#fff;">#9E6440</div></div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Semantic Colors</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.75rem;">
+          <div class="color-swatch"><div class="color-swatch-block" style="background:#22C55E;"></div><div class="color-swatch-info"><div class="color-swatch-name">Success</div><div class="color-swatch-hex">#22C55E</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-block" style="background:#EF4444;"></div><div class="color-swatch-info"><div class="color-swatch-name">Danger</div><div class="color-swatch-hex">#EF4444</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-block" style="background:#F59E0B;"></div><div class="color-swatch-info"><div class="color-swatch-name">Warning</div><div class="color-swatch-hex">#F59E0B</div></div></div>
+          <div class="color-swatch"><div class="color-swatch-block" style="background:#3B82F6;"></div><div class="color-swatch-info"><div class="color-swatch-name">Info</div><div class="color-swatch-hex">#3B82F6</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 2. TYPOGRAPHY ══ -->
+    <section class="ds-section" id="typography">
+      <h2 class="ds-section-title">✏️ Typography</h2>
+      <p class="ds-section-desc">Font: <strong>Inter</strong> (Google Fonts). All weights 300–800. Line-height 1.6 for body; 1.2 for headings.</p>
+
+      <div class="ds-preview" style="background:#fff;border:1px solid var(--color-border);">
+        <div class="type-row">
+          <div class="type-label">H1 / Page Title</div>
+          <div class="type-sample"><h1 style="font-size:2.5rem;font-weight:900;line-height:1.15;color:var(--color-text);">เรียนรู้ทุกอย่างกับ Learnora</h1></div>
+          <div class="type-meta">40px · weight 900<br>line-height 1.15</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">H2 / Section Heading</div>
+          <div class="type-sample"><h2 style="font-size:1.875rem;font-weight:800;color:var(--color-text);">คอร์สยอดนิยม</h2></div>
+          <div class="type-meta">30px · weight 800<br>line-height 1.2</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">H3 / Subheading</div>
+          <div class="type-sample"><h3 style="font-size:1.25rem;font-weight:700;color:var(--color-text);">React Hooks Deep Dive</h3></div>
+          <div class="type-meta">20px · weight 700</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Body Text</div>
+          <div class="type-sample"><p style="font-size:1rem;color:var(--color-text);line-height:1.7;">เรียนรู้การพัฒนาเว็บแอปพลิเคชันด้วย React, Node.js และ MongoDB ตั้งแต่พื้นฐานจนถึงระดับมืออาชีพ</p></div>
+          <div class="type-meta">16px · weight 400<br>line-height 1.7</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Small / Caption</div>
+          <div class="type-sample"><p style="font-size:0.8125rem;color:var(--color-text-muted);">อัปเดตล่าสุด: ธันวาคม 2567 · 52 ชั่วโมง · ระดับ Beginner</p></div>
+          <div class="type-meta">13px · weight 400<br>color: muted</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Link Style</div>
+          <div class="type-sample"><a href="#" onclick="return false" style="color:var(--color-primary);font-weight:600;text-decoration:underline;text-underline-offset:2px;">ดูทั้งหมด →</a></div>
+          <div class="type-meta">color-primary<br>weight 600</div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">Section Label</div>
+          <div class="type-sample"><span class="section-label">คอร์สแนะนำ</span></div>
+          <div class="type-meta">13px · weight 700<br>UPPERCASE</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 3. DESIGN TOKENS ══ -->
+    <section class="ds-section" id="tokens">
+      <h2 class="ds-section-title">🔧 Design Tokens</h2>
+      <p class="ds-section-desc">CSS Custom Properties defined in <code style="background:var(--color-gray-100);padding:0.1rem 0.4rem;border-radius:4px;font-size:0.875rem;">css/styles.css</code>. Use these variables everywhere — never raw hex values.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Spacing / Radius</div>
+        <div class="token-grid">
+          <div class="token-item"><div class="token-name">--radius-sm</div><div class="token-value">0.375rem (6px)</div></div>
+          <div class="token-item"><div class="token-name">--radius-md</div><div class="token-value">0.5rem (8px)</div></div>
+          <div class="token-item"><div class="token-name">--radius-lg</div><div class="token-value">0.75rem (12px)</div></div>
+          <div class="token-item"><div class="token-name">--radius-xl</div><div class="token-value">1rem (16px)</div></div>
+          <div class="token-item"><div class="token-name">--radius-2xl</div><div class="token-value">1.5rem (24px)</div></div>
+          <div class="token-item"><div class="token-name">--radius-full</div><div class="token-value">9999px (pill)</div></div>
+        </div>
+      </div>
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Transitions</div>
+        <div class="token-grid">
+          <div class="token-item"><div class="token-name">--t-fast</div><div class="token-value">all 0.15s ease</div></div>
+          <div class="token-item"><div class="token-name">--t</div><div class="token-value">all 0.2s ease</div></div>
+          <div class="token-item"><div class="token-name">--t-slow</div><div class="token-value">all 0.3s ease</div></div>
+        </div>
+      </div>
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Shadows</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;">
+          <div style="height:72px;background:#fff;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);font-size:0.75rem;font-weight:600;color:var(--color-text-muted);">--shadow-sm</div>
+          <div style="height:72px;background:#fff;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);font-size:0.75rem;font-weight:600;color:var(--color-text-muted);">--shadow-md</div>
+          <div style="height:72px;background:#fff;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);font-size:0.75rem;font-weight:600;color:var(--color-text-muted);">--shadow-lg</div>
+          <div style="height:72px;background:#fff;border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-card);font-size:0.75rem;font-weight:600;color:var(--color-text-muted);">--shadow-card</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 4. BUTTONS ══ -->
+    <section class="ds-section" id="buttons">
+      <h2 class="ds-section-title">🔘 Buttons</h2>
+      <p class="ds-section-desc">All buttons extend the base <code class="ds-tag">.btn</code> class. Transition: 200ms ease. Focus ring: 2px outline using primary color.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Variants</div>
+        <div class="ds-preview">
+          <div class="ds-row">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-outline">Outline</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-danger">Danger</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Sizes</div>
+        <div class="ds-preview">
+          <div class="ds-row" style="align-items:flex-end;">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+            <button class="btn btn-primary btn-xl">X-Large</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">States</div>
+        <div class="ds-preview">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;">
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Default</p>
+              <div><button class="btn btn-primary">Click Me</button></div>
+            </div>
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Hover (move mouse)</p>
+              <div><button class="btn btn-primary" style="background:var(--color-primary-hover);border-color:var(--color-primary-hover);transform:translateY(-1px);box-shadow:0 4px 12px rgba(202,137,95,0.35);">Hovered</button></div>
+            </div>
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Active / Pressed</p>
+              <div><button class="btn btn-primary" style="background:var(--color-primary-active);border-color:var(--color-primary-active);">Active</button></div>
+            </div>
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Focus (Tab key)</p>
+              <div><button class="btn btn-primary" style="outline:2px solid var(--color-primary);outline-offset:2px;">Focused</button></div>
+            </div>
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Loading</p>
+              <div><button class="btn btn-primary" disabled><span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;"></span> กำลังโหลด</button></div>
+            </div>
+            <div>
+              <p class="state-chip" style="display:inline-block;margin-bottom:0.5rem;">Disabled</p>
+              <div><button class="btn btn-primary" disabled>ไม่สามารถใช้งาน</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Block / Full Width</div>
+        <div class="ds-preview" style="max-width:400px;">
+          <button class="btn btn-primary btn-block">ลงทะเบียนเรียนเดี๋ยวนี้</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 5. FORMS ══ -->
+    <section class="ds-section" id="forms">
+      <h2 class="ds-section-title">📋 Forms</h2>
+      <p class="ds-section-desc">Form fields use <code class="ds-tag">.form-input</code>, <code class="ds-tag">.form-select</code>, <code class="ds-tag">.form-textarea</code>. Focus ring: primary color + soft glow. Error state: <code class="ds-tag">.form-input-error</code>.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Input Fields</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">ชื่อ-นามสกุล</label>
+              <input type="text" class="form-input" placeholder="กรอกชื่อของคุณ">
+            </div>
+            <div class="form-group">
+              <label class="form-label">อีเมล</label>
+              <input type="email" class="form-input" placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">รหัสผ่าน</label>
+              <div class="form-input-icon">
+                <span class="input-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                <input type="password" class="form-input" placeholder="••••••••">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ค้นหา</label>
+              <div class="form-input-icon">
+                <span class="input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                <input type="search" class="form-input" placeholder="ค้นหาคอร์ส...">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">หมวดหมู่</label>
+              <select class="form-select">
+                <option value="">เลือกหมวดหมู่</option>
+                <option>การพัฒนาเว็บ</option>
+                <option>UI/UX Design</option>
+                <option>Data Science</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ระดับราคา</label>
+              <input type="range" class="range-input" min="0" max="5000" value="1500">
+            </div>
+            <div class="form-group" style="grid-column:1/-1;">
+              <label class="form-label">คำอธิบาย</label>
+              <textarea class="form-textarea" rows="3" placeholder="เขียนอธิบายคอร์สของคุณ..."></textarea>
+            </div>
+            <div class="form-group">
+              <label class="checkbox-group">
+                <input type="checkbox" checked>
+                <span class="checkbox-label">ยอมรับข้อกำหนดและเงื่อนไข</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <div style="display:flex;flex-direction:column;gap:0.5rem;">
+                <label class="radio-group"><input type="radio" name="r1" checked><span style="font-size:0.9rem;">ผู้เรียน</span></label>
+                <label class="radio-group"><input type="radio" name="r1"><span style="font-size:0.9rem;">ผู้สอน</span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Validation States</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+            <div class="form-group">
+              <label class="form-label form-label-required">ชื่อ (จำเป็น)</label>
+              <input type="text" class="form-input form-input-error" placeholder="กรอกชื่อของคุณ" value="">
+              <span class="form-error">⚠ กรุณากรอกข้อมูลนี้</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">อีเมล</label>
+              <input type="email" class="form-input form-input-error" value="invalid-email">
+              <span class="form-error">⚠ รูปแบบอีเมลไม่ถูกต้อง</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">รหัสผ่าน</label>
+              <input type="password" class="form-input form-input-error" value="123">
+              <span class="form-error">⚠ รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ข้อความ</label>
+              <textarea class="form-textarea form-input-error" style="min-height:80px;" placeholder="ห้ามว่าง"></textarea>
+              <span class="form-error">⚠ กรุณากรอกข้อมูลนี้</span>
+            </div>
+          </div>
+          <!-- Valid example -->
+          <div class="form-group" style="margin-top:1rem;">
+            <label class="form-label">อีเมล (ถูกต้อง)</label>
+            <div style="position:relative;">
+              <input type="email" class="form-input" value="user@learnora.th" style="border-color:var(--color-success);">
+              <span style="position:absolute;right:0.875rem;top:50%;transform:translateY(-50%);color:var(--color-success);font-size:0.8rem;font-weight:700;">✓ ถูกต้อง</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 6. CARDS ══ -->
+    <section class="ds-section" id="cards">
+      <h2 class="ds-section-title">🃏 Cards</h2>
+      <p class="ds-section-desc">Cards use <code class="ds-tag">.card</code> as the base. Hover lifts the shadow. Rounded XL corners, 1px border, subtle shadow.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Basic Card</div>
+        <div class="ds-preview">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
+            <!-- Basic card -->
+            <div class="card">
+              <div class="card-header" style="padding:1rem 1.25rem;">
+                <h3 style="font-weight:700;font-size:0.9375rem;">Card Header</h3>
+              </div>
+              <div class="card-body">
+                <p style="font-size:0.875rem;color:var(--color-text-secondary);">นี่คือตัวอย่าง card พื้นฐาน ใช้สำหรับจัดกลุ่มเนื้อหาที่เกี่ยวข้องกัน</p>
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-primary btn-sm">ดำเนินการ</button>
+              </div>
+            </div>
+            <!-- Metric card -->
+            <div class="stat-card">
+              <div class="stat-card-icon" style="background:rgba(202,137,95,0.1);color:var(--color-primary);"><span style="font-size:1.5rem;">📚</span></div>
+              <div class="stat-card-value">1,247</div>
+              <div class="stat-card-label">คอร์สทั้งหมด</div>
+              <div class="stat-card-change up">↑ 12% จากเดือนที่แล้ว</div>
+            </div>
+            <!-- Profile card -->
+            <div class="card" style="padding:1.5rem;text-align:center;">
+              <img src="https://ui-avatars.com/api/?name=Sarah+J&background=CA895F&color=fff&size=80" style="width:64px;height:64px;border-radius:50%;margin:0 auto 0.875rem;border:3px solid var(--color-border);" alt="">
+              <div style="font-weight:700;font-size:0.9375rem;">Sarah Johnson</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);margin:0.25rem 0 1rem;">Senior Developer · 42 คอร์ส</div>
+              <button class="btn btn-outline btn-sm btn-block">ดูโปรไฟล์</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Course Card</div>
+        <div class="ds-preview">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;">
+            <div class="course-card">
+              <div class="course-card-img">
+                <img src="https://picsum.photos/seed/react2024/400/225" alt="Course">
+                <div class="course-card-badge"><span class="badge badge-bestseller">Bestseller</span></div>
+              </div>
+              <div class="course-card-body">
+                <div class="course-card-category">Web Development</div>
+                <div class="course-card-title">Complete React & Next.js Masterclass</div>
+                <div class="course-card-instructor">Sarah Johnson</div>
+                <div class="course-card-meta">
+                  <span class="course-card-rating">4.9</span>
+                  <span class="course-card-stars">★★★★★</span>
+                  <span class="course-card-reviews">(2,841)</span>
+                </div>
+              </div>
+              <div class="course-card-footer">
+                <div>
+                  <div class="course-card-price">฿990</div>
+                  <div class="course-card-original-price">฿3,500</div>
+                </div>
+                <div class="course-card-duration"><span>⏱</span> 52h</div>
+              </div>
+            </div>
+            <!-- Payment summary card -->
+            <div class="card" style="padding:1.25rem;">
+              <h3 style="font-weight:700;font-size:0.9375rem;margin-bottom:1rem;">สรุปคำสั่งซื้อ</h3>
+              <div style="display:flex;flex-direction:column;gap:0.625rem;margin-bottom:1rem;">
+                <div style="display:flex;justify-content:space-between;font-size:0.875rem;"><span style="color:var(--color-text-muted);">ราคาปกติ</span><span style="text-decoration:line-through;color:var(--color-text-muted);">฿3,500</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:0.875rem;"><span style="color:var(--color-success);">ส่วนลด 72%</span><span style="color:var(--color-success);">-฿2,510</span></div>
+                <div style="height:1px;background:var(--color-border);"></div>
+                <div style="display:flex;justify-content:space-between;"><span style="font-weight:700;">รวม</span><span style="font-size:1.25rem;font-weight:800;color:var(--color-primary);">฿990</span></div>
+              </div>
+              <button class="btn btn-primary btn-block">ชำระเงิน</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 7. BADGES ══ -->
+    <section class="ds-section" id="badges">
+      <h2 class="ds-section-title">🏷️ Badges & Status Labels</h2>
+      <p class="ds-section-desc">Badges use <code class="ds-tag">.badge</code> + a modifier class. All-caps, pill shape, 0.7rem font.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Status Badges</div>
+        <div class="ds-preview">
+          <div class="ds-row">
+            <span class="badge badge-active">Active</span>
+            <span class="badge badge-expiring">Expiring Soon</span>
+            <span class="badge badge-expired">Expired</span>
+            <span class="badge badge-lifetime">Lifetime</span>
+            <span class="badge badge-paid">Paid</span>
+            <span class="badge badge-free">Free</span>
+            <span class="badge badge-draft">Draft</span>
+            <span class="badge badge-published">Published</span>
+            <span class="badge badge-pending">Pending</span>
+            <span class="badge badge-danger">Failed</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-bestseller">Bestseller</span>
+            <span class="badge badge-new">New</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Semantic Badges</div>
+        <div class="ds-preview">
+          <div class="ds-row">
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-purple">Purple</span>
+            <span class="badge badge-mint">Mint</span>
+            <span class="badge badge-warm">Warm</span>
+            <span class="badge badge-gray">Gray</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-warning">Warning</span>
+            <span class="badge badge-danger">Danger</span>
+            <span class="badge badge-info">Info</span>
+            <span class="badge badge-dark">Dark</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Sizes</div>
+        <div class="ds-preview">
+          <div class="ds-row" style="align-items:center;">
+            <span class="badge badge-sm badge-primary">Small</span>
+            <span class="badge badge-primary">Default</span>
+            <span class="badge badge-lg badge-primary">Large</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 8. ALERTS ══ -->
+    <section class="ds-section" id="alerts">
+      <h2 class="ds-section-title">🔔 Alerts</h2>
+      <p class="ds-section-desc">Alert components for contextual feedback. Classes: <code class="ds-tag">.alert .alert-success|warning|danger|info</code>.</p>
+
+      <div class="ds-preview" style="background:#fff;">
+        <div style="display:flex;flex-direction:column;gap:0.875rem;">
+          <div class="alert alert-success">
+            <span style="font-size:1.125rem;flex-shrink:0;">✅</span>
+            <div style="flex:1;"><strong>สำเร็จ!</strong> ลงทะเบียนคอร์สเรียบร้อยแล้ว คุณสามารถเข้าเรียนได้ทันที</div>
+            <button onclick="this.closest('.alert').remove()" style="background:none;border:none;cursor:pointer;color:inherit;opacity:0.7;font-size:1rem;padding:0.25rem;" title="ปิด">×</button>
+          </div>
+          <div class="alert alert-warning">
+            <span style="font-size:1.125rem;flex-shrink:0;">⚠️</span>
+            <div style="flex:1;"><strong>คำเตือน!</strong> คอร์สนี้จะหมดอายุใน 7 วัน กรุณาต่ออายุก่อนสิ้นเดือน</div>
+            <button onclick="this.closest('.alert').remove()" style="background:none;border:none;cursor:pointer;color:inherit;opacity:0.7;font-size:1rem;padding:0.25rem;">×</button>
+          </div>
+          <div class="alert alert-danger">
+            <span style="font-size:1.125rem;flex-shrink:0;">❌</span>
+            <div style="flex:1;"><strong>เกิดข้อผิดพลาด!</strong> ชำระเงินไม่สำเร็จ กรุณาตรวจสอบข้อมูลบัตรและลองอีกครั้ง</div>
+            <button onclick="this.closest('.alert').remove()" style="background:none;border:none;cursor:pointer;color:inherit;opacity:0.7;font-size:1rem;padding:0.25rem;">×</button>
+          </div>
+          <div class="alert alert-info">
+            <span style="font-size:1.125rem;flex-shrink:0;">ℹ️</span>
+            <div style="flex:1;"><strong>แจ้งทราบ:</strong> คอร์สใหม่จาก Sarah Johnson จะเปิดตัวในวันที่ 1 มกราคม 2568</div>
+            <button onclick="this.closest('.alert').remove()" style="background:none;border:none;cursor:pointer;color:inherit;opacity:0.7;font-size:1rem;padding:0.25rem;">×</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 9. ERROR STATES ══ -->
+    <section class="ds-section" id="error-states">
+      <h2 class="ds-section-title">⚠️ Error States</h2>
+      <p class="ds-section-desc">Reusable UI error patterns. No backend logic — display-only components for common failure scenarios.</p>
+
+      <div class="ds-preview">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;">
+
+          <div class="error-card">
+            <div class="error-icon">🔐</div>
+            <div class="error-title">Login Failed</div>
+            <div class="error-desc">อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบและลองอีกครั้ง</div>
+            <button class="btn btn-danger btn-sm">ลองอีกครั้ง</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">💳</div>
+            <div class="error-title">Payment Failed</div>
+            <div class="error-desc">ธุรกรรมถูกปฏิเสธ ยอดเงินในบัตรอาจไม่เพียงพอ</div>
+            <button class="btn btn-outline btn-sm" style="border-color:var(--color-danger);color:var(--color-danger);">ลองวิธีอื่น</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">📡</div>
+            <div class="error-title">Network Error</div>
+            <div class="error-desc">ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้ ตรวจสอบการเชื่อมต่อของคุณ</div>
+            <button class="btn btn-outline btn-sm">รีเฟรช</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">🔥</div>
+            <div class="error-title">Server Error (500)</div>
+            <div class="error-desc">เซิร์ฟเวอร์เกิดข้อผิดพลาด ทีมงานกำลังแก้ไขปัญหา</div>
+            <button class="btn btn-ghost btn-sm">ติดต่อ Support</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">🚫</div>
+            <div class="error-title">Access Denied</div>
+            <div class="error-desc">คุณไม่มีสิทธิ์เข้าถึงหน้านี้ กรุณาเข้าสู่ระบบก่อน</div>
+            <button class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">⏰</div>
+            <div class="error-title">Course Expired</div>
+            <div class="error-desc">สิทธิ์เข้าถึงคอร์สนี้หมดอายุแล้ว ต่ออายุเพื่อเรียนต่อ</div>
+            <button class="btn btn-primary btn-sm">ต่ออายุ</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">🔍</div>
+            <div class="error-title">No Data Found</div>
+            <div class="error-desc">ไม่พบข้อมูลที่ค้นหา ลองเปลี่ยนคำค้นหาแล้วลองใหม่</div>
+            <button class="btn btn-outline btn-sm">ล้างตัวกรอง</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">📁</div>
+            <div class="error-title">File Upload Error</div>
+            <div class="error-desc">ไฟล์ใหญ่เกินไปหรือรูปแบบไม่รองรับ (สูงสุด 2MB, PNG/JPG)</div>
+            <button class="btn btn-outline btn-sm">อัปโหลดใหม่</button>
+          </div>
+
+          <div class="error-card">
+            <div class="error-icon">⚙️</div>
+            <div class="error-title">System Error</div>
+            <div class="error-desc">เกิดข้อผิดพลาดที่ไม่คาดคิด กรุณาลองอีกครั้งในภายหลัง</div>
+            <button class="btn btn-ghost btn-sm">รายงานปัญหา</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Inline form error -->
+      <div class="ds-subsection" style="margin-top:1.5rem;">
+        <div class="ds-subsection-title">Inline Form Errors</div>
+        <div class="ds-preview" style="background:#fff;max-width:400px;">
+          <div class="alert alert-danger" style="margin-bottom:1rem;">
+            <span>❌</span>
+            <span>อีเมลหรือรหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">อีเมล</label>
+            <input type="email" class="form-input form-input-error" value="wrong@email">
+            <span class="form-error">⚠ ไม่พบบัญชีผู้ใช้นี้</span>
+          </div>
+          <div class="form-group" style="margin-top:0.875rem;">
+            <label class="form-label">รหัสผ่าน</label>
+            <input type="password" class="form-input form-input-error" value="1234">
+            <span class="form-error">⚠ รหัสผ่านไม่ถูกต้อง</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 10. NAVIGATION ══ -->
+    <section class="ds-section" id="navigation">
+      <h2 class="ds-section-title">🧭 Navigation Components</h2>
+      <p class="ds-section-desc">Navbar, sidebar, tabs, and breadcrumb patterns used across all pages.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Top Navbar (Scrolled State)</div>
+        <div class="ds-nav-demo">
+          <nav style="background:#fff;border-bottom:1px solid var(--color-border);padding:0 1.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem;box-shadow:var(--shadow-md);">
+            <div style="display:flex;align-items:center;gap:0.5rem;font-size:1.125rem;font-weight:800;color:var(--color-primary);">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+              Learn<span style="color:var(--color-text);">Hub</span>
+            </div>
+            <div style="flex:1;max-width:300px;position:relative;">
+              <svg width="14" height="14" style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:#9CA3AF;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" placeholder="ค้นหาคอร์ส..." style="width:100%;padding:0.45rem 1rem 0.45rem 2.5rem;border:1.5px solid var(--color-border);border-radius:99px;font-size:0.875rem;background:var(--color-gray-50);">
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <a href="#" onclick="return false" class="navbar-link active">หน้าหลัก</a>
+              <a href="#" onclick="return false" class="navbar-link">คอร์สเรียน</a>
+              <button class="btn btn-primary btn-sm">เข้าสู่ระบบ</button>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Sidebar Menu (Dashboard)</div>
+        <div class="ds-nav-demo" style="max-width:260px;">
+          <div style="padding:1rem 1.25rem;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:0.625rem;font-size:1.125rem;font-weight:800;color:var(--color-primary);">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#CA895F"/><path d="M8 10h12M8 14h10M8 18h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            LearnHub
+          </div>
+          <div style="padding:1rem 0.75rem;">
+            <div class="sidebar-section-title">เมนูหลัก</div>
+            <a href="#" onclick="return false" class="sidebar-link active">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Dashboard
+            </a>
+            <a href="#" onclick="return false" class="sidebar-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              คอร์สของฉัน <span class="sidebar-badge">7</span>
+            </a>
+            <a href="#" onclick="return false" class="sidebar-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              ใบประกาศนียบัตร
+            </a>
+            <a href="#" onclick="return false" class="sidebar-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>
+              ตั้งค่าบัญชี
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Tab Menu</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div data-tabs>
+            <div class="tabs">
+              <button class="tab-btn active">ภาพรวม</button>
+              <button class="tab-btn">เนื้อหาคอร์ส</button>
+              <button class="tab-btn">ผู้สอน</button>
+              <button class="tab-btn">รีวิว</button>
+            </div>
+            <div class="tab-panel active"><p style="font-size:0.875rem;color:var(--color-text-secondary);padding-top:0.5rem;">เนื้อหาแท็บ ภาพรวม — คำอธิบายหลักสูตรและสิ่งที่จะได้เรียนรู้</p></div>
+            <div class="tab-panel"><p style="font-size:0.875rem;color:var(--color-text-secondary);padding-top:0.5rem;">เนื้อหาแท็บ เนื้อหาคอร์ส — รายการ Section และบทเรียนทั้งหมด</p></div>
+            <div class="tab-panel"><p style="font-size:0.875rem;color:var(--color-text-secondary);padding-top:0.5rem;">เนื้อหาแท็บ ผู้สอน — ประวัติและผลงานของผู้สอน</p></div>
+            <div class="tab-panel"><p style="font-size:0.875rem;color:var(--color-text-secondary);padding-top:0.5rem;">เนื้อหาแท็บ รีวิว — คะแนนและความคิดเห็นจากผู้เรียน</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Breadcrumb</div>
+        <div class="ds-preview" style="background:#fff;">
+          <nav style="display:flex;align-items:center;gap:0.5rem;font-size:0.875rem;">
+            <a href="#" onclick="return false" style="color:var(--color-text-muted);transition:color 0.15s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-muted)'">หน้าหลัก</a>
+            <span style="color:var(--color-text-muted);">›</span>
+            <a href="#" onclick="return false" style="color:var(--color-text-muted);transition:color 0.15s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-muted)'">การพัฒนาเว็บ</a>
+            <span style="color:var(--color-text-muted);">›</span>
+            <span style="color:var(--color-text);font-weight:600;">Complete React Bootcamp</span>
+          </nav>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Pill Tabs</div>
+        <div class="ds-preview">
+          <div data-tabs class="tabs-pill">
+            <button class="tab-btn active">ทั้งหมด</button>
+            <button class="tab-btn">กำลังเรียน</button>
+            <button class="tab-btn">เรียนจบแล้ว</button>
+            <button class="tab-btn">ยังไม่เริ่ม</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 11. TABLES ══ -->
+    <section class="ds-section" id="tables">
+      <h2 class="ds-section-title">📊 Tables</h2>
+      <p class="ds-section-desc">Wrap tables in <code class="ds-tag">.table-wrapper</code> for horizontal scroll on mobile. Use <code class="ds-tag">.table</code> on the element.</p>
+
+      <div class="ds-preview" style="background:#fff;padding:0;">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ชื่อคอร์ส</th>
+                <th>สถานะ</th>
+                <th>ราคา</th>
+                <th>สิทธิ์การเข้าถึง</th>
+                <th>ความก้าวหน้า</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:0.875rem;">Complete React & Next.js</div>
+                  <div style="font-size:0.75rem;color:var(--color-text-muted);">Sarah Johnson</div>
+                </td>
+                <td><span class="badge badge-active">Active</span></td>
+                <td style="font-weight:700;color:var(--color-primary);">฿990</td>
+                <td><span class="badge badge-lifetime">Lifetime</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <div class="progress-bar" style="width:80px;"><div class="progress-fill" style="width:72%;"></div></div>
+                    <span style="font-size:0.75rem;font-weight:600;">72%</span>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;gap:0.375rem;">
+                    <button class="table-action-btn primary">เรียน</button>
+                    <button class="table-action-btn danger">ลบ</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:0.875rem;">Python for Data Science</div>
+                  <div style="font-size:0.75rem;color:var(--color-text-muted);">Alex Chen</div>
+                </td>
+                <td><span class="badge badge-expiring">Expiring Soon</span></td>
+                <td style="font-weight:700;color:var(--color-primary);">฿790</td>
+                <td><span class="badge badge-warning">1 ปี</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <div class="progress-bar" style="width:80px;"><div class="progress-fill success" style="width:100%;"></div></div>
+                    <span style="font-size:0.75rem;font-weight:600;color:var(--color-success);">100%</span>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;gap:0.375rem;">
+                    <button class="table-action-btn primary" onclick="showToast('ดูใบ Certificate')">Certificate</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="font-weight:600;font-size:0.875rem;">UI/UX Design Fundamentals</div>
+                  <div style="font-size:0.75rem;color:var(--color-text-muted);">Emma Wilson</div>
+                </td>
+                <td><span class="badge badge-expired">Expired</span></td>
+                <td style="font-weight:700;color:var(--color-primary);">฿1,290</td>
+                <td><span class="badge badge-expired">หมดอายุ</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <div class="progress-bar" style="width:80px;"><div class="progress-fill" style="width:38%;background:var(--color-danger);"></div></div>
+                    <span style="font-size:0.75rem;font-weight:600;">38%</span>
+                  </div>
+                </td>
+                <td>
+                  <button class="table-action-btn primary" onclick="showToast('ต่ออายุคอร์ส')">ต่ออายุ</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 12. MODAL ══ -->
+    <section class="ds-section" id="modal">
+      <h2 class="ds-section-title">💬 Modal / Dialog</h2>
+      <p class="ds-section-desc">Modal uses <code class="ds-tag">.modal-overlay</code> + <code class="ds-tag">.modal</code>. Toggle by adding/removing the <code class="ds-tag">.open</code> class.</p>
+
+      <div class="ds-preview">
+        <div class="ds-row">
+          <button class="btn btn-primary" onclick="openModal('demoModal')">เปิด Modal ยืนยัน</button>
+          <button class="btn btn-outline" onclick="openModal('videoModal')">เปิด Modal วิดีโอ</button>
+          <button class="btn btn-danger" onclick="openModal('deleteModal')">Modal ลบข้อมูล</button>
+        </div>
+      </div>
+
+      <!-- Confirm Modal -->
+      <div class="modal-overlay" id="demoModal" onclick="if(event.target===this)closeModal('demoModal')">
+        <div class="modal" style="padding:2rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;">
+            <h3 style="font-size:1.125rem;font-weight:800;">ยืนยันการลงทะเบียน</h3>
+            <button onclick="closeModal('demoModal')" style="color:var(--color-text-muted);background:none;border:none;cursor:pointer;font-size:1.25rem;padding:0.25rem;">×</button>
+          </div>
+          <div style="background:var(--color-gray-50);border-radius:var(--radius-lg);padding:1rem;margin-bottom:1.25rem;display:flex;gap:1rem;align-items:center;">
+            <img src="https://picsum.photos/seed/react2024/80/56" style="width:72px;height:50px;border-radius:var(--radius-md);object-fit:cover;">
+            <div>
+              <div style="font-weight:700;font-size:0.9375rem;">Complete React & Next.js Masterclass</div>
+              <div style="font-size:0.8rem;color:var(--color-text-muted);">Sarah Johnson · 52 ชั่วโมง</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:1.5rem;font-size:0.9rem;">
+            <span style="color:var(--color-text-muted);">ราคาชำระ</span>
+            <span style="font-size:1.25rem;font-weight:800;color:var(--color-primary);">฿990</span>
+          </div>
+          <div style="display:flex;gap:0.75rem;">
+            <button onclick="closeModal('demoModal')" class="btn btn-ghost" style="flex:1;">ยกเลิก</button>
+            <button onclick="closeModal('demoModal');showToast('ลงทะเบียนสำเร็จ! 🎉','success')" class="btn btn-primary" style="flex:1;">ยืนยันชำระเงิน</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Modal -->
+      <div class="modal-overlay" id="videoModal" onclick="if(event.target===this)closeModal('videoModal')">
+        <div class="modal" style="max-width:700px;padding:0;background:#000;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:0.875rem 1.25rem;background:#1A1A1A;">
+            <span style="color:#fff;font-size:0.9375rem;font-weight:600;">ตัวอย่างคอร์ส · 5:30 นาที</span>
+            <button onclick="closeModal('videoModal')" style="color:#9CA3AF;background:none;border:none;cursor:pointer;font-size:1.25rem;">×</button>
+          </div>
+          <div style="aspect-ratio:16/9;background:#111;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;">
+            <div style="width:56px;height:56px;border-radius:50%;background:rgba(202,137,95,0.9);display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="showToast('เล่นวิดีโอ ▶')">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <p style="color:#6B7280;font-size:0.875rem;">คลิกเพื่อเล่นตัวอย่าง</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Delete Modal -->
+      <div class="modal-overlay" id="deleteModal" onclick="if(event.target===this)closeModal('deleteModal')">
+        <div class="modal" style="padding:2rem;max-width:420px;text-align:center;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--color-danger-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.5rem;">🗑️</div>
+          <h3 style="font-size:1.125rem;font-weight:800;margin-bottom:0.5rem;">ยืนยันการลบ</h3>
+          <p style="font-size:0.875rem;color:var(--color-text-muted);margin-bottom:1.75rem;">คุณต้องการลบคอร์ส "Complete React Bootcamp" ออกจากรายการหรือไม่? การกระทำนี้ไม่สามารถยกเลิกได้</p>
+          <div style="display:flex;gap:0.75rem;">
+            <button onclick="closeModal('deleteModal')" class="btn btn-outline" style="flex:1;">ยกเลิก</button>
+            <button onclick="closeModal('deleteModal');showToast('ลบเรียบร้อยแล้ว','warning')" class="btn btn-danger" style="flex:1;">ลบออก</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 13. INTERACTIVE ══ -->
+    <section class="ds-section" id="interactive">
+      <h2 class="ds-section-title">⚡ Interactive Components</h2>
+      <p class="ds-section-desc">Reusable interactive patterns across the platform.</p>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Accordion</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div>
+            <div class="accordion-item open">
+              <div class="accordion-header" onclick="this.closest('.accordion-item').classList.toggle('open');this.nextElementSibling.style.maxHeight=this.closest('.accordion-item').classList.contains('open')?'200px':'0'">
+                <span class="accordion-title">Section 1: บทนำ (4 บทเรียน)</span>
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <div class="accordion-body" style="max-height:200px;">
+                <div class="accordion-body-inner">
+                  <ul style="display:flex;flex-direction:column;gap:0.5rem;">
+                    <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.875rem;"><span style="color:var(--color-primary);">▶</span> ยินดีต้อนรับสู่คอร์ส</li>
+                    <li style="display:flex;align-items:center;gap:0.625rem;font-size:0.875rem;"><span style="color:var(--color-primary);">▶</span> ติดตั้ง Development Environment</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <div class="accordion-header" onclick="this.closest('.accordion-item').classList.toggle('open');this.nextElementSibling.style.maxHeight=this.closest('.accordion-item').classList.contains('open')?'200px':'0'">
+                <span class="accordion-title">Section 2: JavaScript Fundamentals (8 บทเรียน)</span>
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <div class="accordion-body" style="max-height:0;">
+                <div class="accordion-body-inner">
+                  <p style="font-size:0.875rem;color:var(--color-text-secondary);">เนื้อหาในส่วนนี้ครอบคลุม Variables, Functions, Arrays, Objects และ ES6+</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Dropdown</div>
+        <div class="ds-preview" style="background:#fff;position:relative;z-index:10;">
+          <div class="dropdown" style="display:inline-flex;">
+            <button class="btn btn-outline" onclick="toggleDropdown('demoDropdown')">
+              จัดเรียง <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="dropdown-menu" id="demoDropdown">
+              <div class="dropdown-header">จัดเรียงตาม</div>
+              <button class="dropdown-item" onclick="showToast('จัดเรียงตามความนิยม')">ความนิยม</button>
+              <button class="dropdown-item" onclick="showToast('จัดเรียงตามคะแนน')">คะแนนสูงสุด</button>
+              <button class="dropdown-item" onclick="showToast('จัดเรียงตามราคา')">ราคา</button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="showToast('ล้างตัวกรอง')">ล้างตัวกรอง</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Toggle Switch</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;max-width:380px;">
+              <div><div style="font-weight:600;font-size:0.9375rem;">รับการแจ้งเตือนอีเมล</div><div style="font-size:0.8rem;color:var(--color-text-muted);">รับข่าวสารและโปรโมชัน</div></div>
+              <label style="position:relative;display:inline-block;width:48px;height:26px;cursor:pointer;">
+                <input type="checkbox" checked onchange="showToast(this.checked?'เปิดการแจ้งเตือน ✅':'ปิดการแจ้งเตือน')" style="opacity:0;width:0;height:0;">
+                <span style="position:absolute;inset:0;background:var(--color-primary);border-radius:99px;transition:0.2s;"></span>
+                <span style="position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.2s;transform:translateX(22px);box-shadow:0 1px 3px rgba(0,0,0,0.2);"></span>
+              </label>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;max-width:380px;">
+              <div><div style="font-weight:600;font-size:0.9375rem;">โหมดมืด</div><div style="font-size:0.8rem;color:var(--color-text-muted);">ปรับหน้าจอเป็น Dark Mode</div></div>
+              <label style="position:relative;display:inline-block;width:48px;height:26px;cursor:pointer;">
+                <input type="checkbox" onchange="showToast(this.checked?'Dark Mode On 🌙':'Light Mode On ☀️')" style="opacity:0;width:0;height:0;">
+                <span id="toggleOff" style="position:absolute;inset:0;background:var(--color-border);border-radius:99px;transition:0.2s;"></span>
+                <span style="position:absolute;height:20px;width:20px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Payment Method Selection</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;" id="paymentSelector">
+            <label style="cursor:pointer;">
+              <input type="radio" name="payDemo" value="card" checked style="display:none;" onchange="selectPayment(this.value)">
+              <div class="pay-option active" id="pay-card" style="border:2px solid var(--color-primary);border-radius:var(--radius-lg);padding:0.875rem 1.25rem;min-width:120px;text-align:center;background:rgba(202,137,95,0.05);transition:all 0.2s;">
+                <div style="font-size:1.375rem;margin-bottom:0.25rem;">💳</div>
+                <div style="font-size:0.8125rem;font-weight:700;color:var(--color-primary);">บัตรเครดิต</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;">
+              <input type="radio" name="payDemo" value="promptpay" style="display:none;" onchange="selectPayment(this.value)">
+              <div class="pay-option" id="pay-promptpay" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:0.875rem 1.25rem;min-width:120px;text-align:center;transition:all 0.2s;">
+                <div style="font-size:1.375rem;margin-bottom:0.25rem;">📱</div>
+                <div style="font-size:0.8125rem;font-weight:700;color:var(--color-text-muted);">PromptPay</div>
+              </div>
+            </label>
+            <label style="cursor:pointer;">
+              <input type="radio" name="payDemo" value="truemoney" style="display:none;" onchange="selectPayment(this.value)">
+              <div class="pay-option" id="pay-truemoney" style="border:2px solid var(--color-border);border-radius:var(--radius-lg);padding:0.875rem 1.25rem;min-width:120px;text-align:center;transition:all 0.2s;">
+                <div style="font-size:1.375rem;margin-bottom:0.25rem;">🏦</div>
+                <div style="font-size:0.8125rem;font-weight:700;color:var(--color-text-muted);">TrueMoney</div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Course Action Buttons</div>
+        <div class="ds-preview">
+          <div class="ds-row">
+            <button class="btn btn-primary" onclick="showToast('เริ่มเรียนแล้ว ▶')">▶ เริ่มเรียน</button>
+            <button class="btn btn-outline" onclick="showToast('เพิ่มในรายการโปรดแล้ว ♡')">♡ บันทึก</button>
+            <button class="btn btn-secondary" onclick="showToast('แชร์คอร์สแล้ว 🔗')">🔗 แชร์</button>
+            <button class="btn btn-ghost" onclick="showToast('เพิ่มในตะกร้าแล้ว 🛒')">🛒 เพิ่มในตะกร้า</button>
+            <button class="btn btn-danger btn-sm" onclick="showToast('นำออกจากรายการ','warning')">ลบ</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Progress Bar</div>
+        <div class="ds-preview" style="background:#fff;">
+          <div style="display:flex;flex-direction:column;gap:1rem;max-width:500px;">
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.375rem;"><span style="color:var(--color-text-muted);">ความก้าวหน้าการเรียน</span><span style="font-weight:700;color:var(--color-primary);">72%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:72%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.375rem;"><span style="color:var(--color-text-muted);">เรียนจบแล้ว</span><span style="font-weight:700;color:var(--color-success);">100%</span></div>
+              <div class="progress-bar"><div class="progress-fill success" style="width:100%;"></div></div>
+            </div>
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:0.375rem;"><span style="color:var(--color-text-muted);">ยังไม่เริ่ม</span><span style="font-weight:700;color:var(--color-text-muted);">0%</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width:0%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <div class="ds-subsection-title">Toast Notifications</div>
+        <div class="ds-preview">
+          <div class="ds-row">
+            <button class="btn btn-primary btn-sm" onclick="showToast('สำเร็จ! บันทึกข้อมูลแล้ว ✅','success')">Success Toast</button>
+            <button class="btn btn-outline btn-sm" onclick="showToast('คำเตือน: คอร์สใกล้หมดอายุ ⚠️','warning')">Warning Toast</button>
+            <button class="btn btn-danger btn-sm" onclick="showToast('เกิดข้อผิดพลาด กรุณาลองใหม่','error')">Error Toast</button>
+            <button class="btn btn-ghost btn-sm" onclick="showToast('โหลดข้อมูลแล้ว ℹ️','info')">Info Toast</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer spacing -->
+    <div style="padding-bottom:4rem;"></div>
+  </main>
+</div>
+
+<!-- Shared Footer placeholder -->
+<div id="footer-placeholder"></div>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+
+<script src="js/mock-data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Init shared navbar + footer
+  initPage({ type: 'public', page: 'design-system' });
+
+  // Init tabs and accordions
+  initTabs();
+
+  // Scroll-spy for sidenav
+  const sections = document.querySelectorAll('.ds-section[id]');
+  const navLinks = document.querySelectorAll('.ds-sidenav a[href^="#"]');
+  function updateActiveLink() {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+
+  // Modal helpers
+  function openModal(id) {
+    const m = document.getElementById(id);
+    if (m) { m.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  }
+  function closeModal(id) {
+    const m = document.getElementById(id);
+    if (m) { m.classList.remove('open'); document.body.style.overflow = ''; }
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); document.body.style.overflow = ''; } });
+
+  // Payment selection
+  function selectPayment(val) {
+    ['card','promptpay','truemoney'].forEach(v => {
+      const el = document.getElementById('pay-' + v);
+      if (!el) return;
+      const active = v === val;
+      el.style.borderColor = active ? 'var(--color-primary)' : 'var(--color-border)';
+      el.style.background = active ? 'rgba(202,137,95,0.05)' : '';
+      el.querySelector('div:last-child').style.color = active ? 'var(--color-primary)' : 'var(--color-text-muted)';
+    });
+  }
+</script>
+</body>
+</html>
